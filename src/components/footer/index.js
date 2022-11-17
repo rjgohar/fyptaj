@@ -1,4 +1,5 @@
 import { Box, makeStyles, Typography } from "@material-ui/core";
+import FacebookIcon from "@material-ui/icons/Facebook";
 import React from "react";
 import TextField from "../input";
 import MailIcon from "@material-ui/icons/Mail";
@@ -7,11 +8,23 @@ import PhoneIcon from "@material-ui/icons/Phone";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 import logo from "../../assets/logo.jpg";
 import Buttons from "../buttons";
-
+import TwitterIcon from "@material-ui/icons/Twitter";
+import InstagramIcon from "@material-ui/icons/Instagram";
 export default function Footer() {
   const classes = useStyles();
   return (
     <div className={classes.maincontainer}>
+      <div className={classes.socialContainer}>
+        <Box>
+          {" "}
+          <Typography>Get connected with us on social networks!</Typography>
+        </Box>
+        <Box className={classes.innersocail}>
+          <FacebookIcon className="icons" />
+          <TwitterIcon className="icons" />
+          <InstagramIcon className="icons" />
+        </Box>
+      </div>
       <Box className={classes.main}>
         <Box>
           <div className={classes.innerHead}>
@@ -20,7 +33,7 @@ export default function Footer() {
         </Box>
         <Box>
           <Typography className={classes.heading} variant="h3">
-            AGROIC
+            Agroic
           </Typography>
           <div className={classes.innerHead}>
             <Typography className="text1" variant="subtitle2">
@@ -91,7 +104,7 @@ export default function Footer() {
 
         <Box>
           <Typography className={classes.heading} variant="h3">
-            GET IN TOUCH
+            get in touch
           </Typography>
           <div className={classes.innerHead}>
             <Box className={classes.innerSec}>
@@ -114,6 +127,10 @@ export default function Footer() {
             </Buttons>
           </div>
         </Box>
+      </Box>
+
+      <Box className={classes.end}>
+        <Typography variant="body1">© 2022 Copyright: FYP </Typography>
       </Box>
     </div>
   );
@@ -202,7 +219,7 @@ const useStyles = makeStyles((theme) => ({
       display: "flex",
       gap: 10,
       "& .icons": {
-        width: "40px",
+        width: "32px",
         color: "#fdd57d",
       },
 
@@ -215,11 +232,37 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   textarea: {
+    outline: "none",
     width: 250,
     height: 150,
     backgroundColor: "transparent",
     color: theme.palette.text.primary,
     border: "3px solid" + theme.palette.text.primary,
     resize: "none",
+  },
+
+  end: {
+    color: theme.palette.text.secondary,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "20px 0px",
+  },
+  socialContainer: {
+    display: "flex",
+    padding: "70px 0px 10px 0px",
+    color: theme.palette.text.primary,
+    justifyContent: "space-around",
+    flexWrap: "wrap",
+    [theme.breakpoints.down("xs")]: {
+      justifyContent: "center",
+    },
+  },
+  innersocail: {
+    display: "flex",
+    gap: 20,
+    "& .icons": {
+      fontSize: 32,
+    },
   },
 }));

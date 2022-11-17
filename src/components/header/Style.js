@@ -69,6 +69,7 @@ const useStyles = makeStyles((theme) => ({
 
     "& .textHead": {
       textTransform: " capitalize",
+      fontSize: 18,
       "&:hover": {
         cursor: "pointer",
       },

@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/styles";
 import bg_Img from "../../assets/bg.jpg";
 const useStyles = makeStyles((theme) => ({
   maainabouthead: {
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.head,
     display: "flex",
     flexDirection: "column",
     gap: 40,
@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     height: " 600px",
     width: "100%",
-    opacity: 0.8,
+    opacity: 0.9,
     backgroundImage: `url(${bg_Img})`,
     backgroungPosition: "center",
     backgroundRepeat: "no-repeat",

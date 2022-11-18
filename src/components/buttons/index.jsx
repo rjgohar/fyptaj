@@ -13,16 +13,15 @@ const Buttons = withStyles((theme) => ({
   },
 
   contained: {
-    border: `2px solid ${theme.palette.background.blue}`,
     borderRadius: "3px",
-    backgroundColor: theme.palette.background.blue,
+    background: theme.palette.background.main,
     color: "white",
     padding: "5px 8.5px",
     fontWeight: 600,
     fontSize: "15px",
     textTransform: "capitalize",
     "&:hover": {
-      backgroundColor: theme.palette.background.blue,
+      background: theme.palette.background.secondary,
     },
   },
   text: {

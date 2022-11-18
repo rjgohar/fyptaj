@@ -19,7 +19,7 @@ const Header = () => {
       <div className={classes.root}>
         <AppBar
           className={classes.AppBar}
-          position="static"
+          position="fixed"
           style={{ backgroundColor: "red" }}
         >
           <Toolbar className={classes.Toolbar}>

@@ -56,6 +56,13 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "12px",
     },
   },
+  iconCard: {
+    color: theme.palette.text.primary,
+    width: 42,
+    "& :hover": {
+      cursor: "pointer",
+    },
+  },
   headerMidData: {
     display: "flex",
 

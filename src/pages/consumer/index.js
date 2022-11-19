@@ -1,5 +1,11 @@
 import React from "react";
 
+import ProductsMap from "../../components/productCard/productMap";
+
 export default function Consumer() {
-  return <div style={{ height: 440, color: "red" }}>Consumer</div>;
+  return (
+    <div>
+      <ProductsMap />
+    </div>
+  );
 }

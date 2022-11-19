@@ -4,6 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import Logo from "../../assets/logo.jpg";
 import HamBurger from "../HamBurger/index";
 // import "./Header.css";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import useStyles from "./Style";
 import { useNavigate } from "react-router-dom";
 import Buttons from "../buttons";
@@ -76,7 +77,8 @@ const Header = () => {
                 about
               </Typography>
             </div>
-            <div>
+            <div style={{ display: "flex", gap: 20 }}>
+              <ShoppingCartIcon className={classes.iconCard} />
               <Buttons
                 variant="outlined"
                 onClick={() => {

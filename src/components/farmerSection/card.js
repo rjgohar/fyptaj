@@ -15,7 +15,10 @@ export default function CardFarmer({ description }) {
       </div>
 
       <div className={classes.btn}>
-        <Buttons variant="contained"> explore more</Buttons>
+        <Link to="/uploadProduct">
+          {" "}
+          <Buttons variant="contained"> explore more</Buttons>
+        </Link>
       </div>
     </Box>
   );

@@ -7,7 +7,9 @@ import ReduxProvider from "./redux/store";
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Routers />
+      <ReduxProvider>
+        <Routers />
+      </ReduxProvider>
     </ThemeProvider>
   );
 }

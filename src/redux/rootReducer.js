@@ -1,4 +1,6 @@
 import { combineReducers } from "@reduxjs/toolkit";
-
-const rootReducer = combineReducers({});
+import registerSlice from "./register/register.slicer";
+const rootReducer = combineReducers({
+  registerSlice,
+});
 export default rootReducer;

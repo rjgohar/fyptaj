@@ -8,11 +8,6 @@ import UploadImage from "../../components/dropFileInput";
 
 const UploadFile = () => {
   const classes = useStyle();
-  const [checked, setChecked] = React.useState(true);
-
-  const handleChange = (event) => {
-    setChecked(event.target.checked);
-  };
 
   const CHARACTER_LIMIT = 20;
   const CHARACTER_LIMIT_PARA = 50;

@@ -65,67 +65,69 @@ export default function SignupSection() {
           hello! let's get started
         </Typography>
       </Box>
-      <Box pt={8} pb={2}>
-        <Typography className={classes.typo} variant="body1">
-          {" "}
-          userName
-        </Typography>
-        <TextField
-          name="userName"
-          variant="outlined"
-          placeholder="UserName"
-          value={formik.values.userName}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          helperText={formik.touched.userName && formik.errors.userName}
-          error={formik.touched.userName && Boolean(formik.errors.userName)}
-        />
-      </Box>
-      <Box pt={2} pb={3}>
-        <Typography className={classes.typo} variant="body1">
-          {" "}
-          Email Address / NIC
-        </Typography>
-        <TextField
-          variant="outlined"
-          placeholder="email"
-          name="email"
-          value={formik.values.email}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          helperText={formik.touched.email && formik.errors.email}
-          error={formik.touched.email && Boolean(formik.errors.email)}
-        />
-      </Box>
-      <Box pt={2} pb={3}>
-        <Typography className={classes.typo} variant="body1">
-          {" "}
-          Password
-        </Typography>
-        <TextField
-          variant="outlined"
-          placeholder="Password"
-          name="passowrd"
-          value={formik.values.passowrd}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          helperText={formik.touched.passowrd && formik.errors.passowrd}
-          error={formik.touched.passowrd && Boolean(formik.errors.passowrd)}
-        />
-      </Box>
-      <Typography
-        style={{ color: "#fff", fontSize: "16px", textAlign: "center" }}
-      ></Typography>
-      <Box mt={3} style={{ display: "flex", justifyContent: "center" }}>
-        <Buttons
-          className={classes.ButtonSignin}
-          variant="contained"
-          type="submit"
-        >
-          {" "}
-          Sign Up
-        </Buttons>
-      </Box>
+      <form onSubmit={formik.handleSubmit}>
+        <Box pt={8} pb={2}>
+          <Typography className={classes.typo} variant="body1">
+            {" "}
+            userName
+          </Typography>
+          <TextField
+            name="userName"
+            variant="outlined"
+            placeholder="UserName"
+            value={formik.values.userName}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            helperText={formik.touched.userName && formik.errors.userName}
+            error={formik.touched.userName && Boolean(formik.errors.userName)}
+          />
+        </Box>
+        <Box pt={2} pb={3}>
+          <Typography className={classes.typo} variant="body1">
+            {" "}
+            Email Address / NIC
+          </Typography>
+          <TextField
+            variant="outlined"
+            placeholder="email"
+            name="email"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            helperText={formik.touched.email && formik.errors.email}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+          />
+        </Box>
+        <Box pt={2} pb={3}>
+          <Typography className={classes.typo} variant="body1">
+            {" "}
+            Password
+          </Typography>
+          <TextField
+            variant="outlined"
+            placeholder="Password"
+            name="passowrd"
+            value={formik.values.passowrd}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            helperText={formik.touched.passowrd && formik.errors.passowrd}
+            error={formik.touched.passowrd && Boolean(formik.errors.passowrd)}
+          />
+        </Box>
+        <Typography
+          style={{ color: "#fff", fontSize: "16px", textAlign: "center" }}
+        ></Typography>
+        <Box mt={3} style={{ display: "flex", justifyContent: "center" }}>
+          <Buttons
+            className={classes.ButtonSignin}
+            variant="contained"
+            type="submit"
+          >
+            {" "}
+            Sign Up
+          </Buttons>
+        </Box>
+      </form>
     </Box>
   );
 }

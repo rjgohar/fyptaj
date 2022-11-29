@@ -4,7 +4,6 @@ const InputField = withStyles((theme) => ({
     backgroundColor: "transparent",
     border: "2px solid black",
     borderRadius: "21px",
-    height: "42px",
     position: "relative",
     color: "black",
     fontSize: "14px",

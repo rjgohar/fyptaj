@@ -1,109 +1,94 @@
-import React from "react";
-import { FileUploader } from "react-drag-drop-files";
+import React, { useRef } from "react";
+import { makeStyles, Typography } from "@material-ui/core";
 import PublishIcon from "@material-ui/icons/Publish";
+import clsx from "clsx";
+function ImageUpload({ formik, value, helperText, error }) {
+  const inputRef = useRef(null);
+  const handleChange = async (event) => {
+    const file = event.target.files[0];
+    formik.setFieldValue("file", file);
+  };
+  const classes = useStyles();
+  return (
+    <div>
+      <div className={classes.upload} onClick={() => inputRef.current.click()}>
+        <div className={classes.widthNft}>
+          <PublishIcon className={classes.icon} />
 
-import { makeStyles } from "@material-ui/core";
-const UploadImage = React.forwardRef(
-  ({ handleImageUploadComplete, helperText, error, value }, ref) => {
-    const classes = useStyles();
-    const [isImgUploading, setIsImgUploading] = React.useState(false);
-    const [isInvalidFile, setIsInvalidFile] = React.useState(false);
-    const handleFileUpload = (file) => {
-      setIsInvalidFile(null);
-      setIsImgUploading(true);
-      // check for file
-      if (
-        !file ||
-        !/\.(jpg|jpeg|png|gif|tiff|tif|heif|heic|svg|svgz|ai|mp4|ogg|webm|mov)$/.test(
-          file.name.toLowerCase()
-        )
-      ) {
-        setIsInvalidFile("Only image and video NFTs are allowed.");
-        setIsImgUploading(false);
-        return false;
-      }
-      setIsImgUploading(false);
-      handleImageUploadComplete(file);
-      const res = URL.createObjectURL(file);
-      ref.current.poster = res;
-      ref.current.src = res;
-    };
-    return (
-      <div className={classes.leftleft}>
-        <div className={classes.label1}>
-          <FileUploader
-            classes="drag_n_drop"
-            handleChange={handleFileUpload}
-            name="imageFile"
-            type="file"
-          >
-            <div className={classes.innerLabel}>
-              <PublishIcon
-                style={{ fontSize: "90px" }}
-                className={classes.uploadicon}
-              />
-              <p className={classes.drag}>
-                Drag and drop or Choose file to upload
-              </p>
-            </div>
-          </FileUploader>
+          <Typography variant="h5">Click here to upload</Typography>
         </div>
-        <div className={classes.mainLabel}>
-          {(error || isInvalidFile) && (
-            <p className={classes.error}>{isInvalidFile || helperText}</p>
-          )}
-        </div>
+        {value && (
+          <div className={classes.image}>
+            <img
+              src={value && URL.createObjectURL(value)}
+              alt="nft"
+              style={{ width: "100%", height: "100%" }}
+            />
+          </div>
+        )}
       </div>
-    );
-  }
-);
-export default UploadImage;
+
+      <small
+        className={clsx(classes.helperText, { [classes.error]: error })}
+        dangerouslySetInnerHTML={{ __html: helperText }}
+      />
+      <Typography className={classes.helperText}>
+        File format&nbsp;:&nbsp; JPEG, GIF, JPG, PNG, SVG, MP4
+      </Typography>
+      <input
+        type={"file"}
+        name="file"
+        onChange={handleChange}
+        ref={inputRef}
+        hidden
+      />
+    </div>
+  );
+}
+
+export default ImageUpload;
 
 const useStyles = makeStyles((theme) => ({
-  leftleft: {
-    display: "flex",
-    border: "2px solid black",
-    justifyContent: "center",
-    alignItems: "center",
-    width: 500,
-    height: 400,
-    [theme.breakpoints.down("sm")]: {
-      border: "1.16502px solid black",
-    },
-  },
-
-  mainLabel: {
-    fontFamily: "Poppins, sans-serif",
-  },
-
-  innerLabel: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    cursor: "pointer",
-    fontFamily: "Poppins,sans-serif",
-    color: "black",
-    fontSize: "30px",
-    "& p": {
-      fontSize: "12px",
-    },
-  },
   upload: {
-    fontSize: "16px",
-    fontWeight: "bold",
+    border: `solid 2px ${theme.palette.secondary.main}`,
+    borderRadius: "20px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    cursor: "pointer",
+    flexDirection: "column",
+    height: "100%",
+    overflow: "hidden",
+    width: "100%",
   },
-  drag: {
-    fontSize: "19.68px",
-    color: " black",
-    fontFamily: "poppins",
-    fontWeight: "",
+  icon: {
+    color: theme.palette.text.secondary,
   },
-  uploadicon: {
-    color: "black",
+  widthNft: {
+    position: "absolute",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "Center",
+    flexDirection: "column",
+    width: "fit-content",
+    height: "fit-content",
+    zIndex: 10,
+  },
+
+  image: {
+    minWidth: "100%",
+    minHeight: "100%",
+    zIndex: 100,
+    "&:hover": {
+      zIndex: -1,
+    },
+  },
+
+  helperText: {
+    marginTop: 2,
+    fontSize: "1rem",
   },
   error: {
-    fontSize: 14,
-    color: "#F44336",
+    color: "red",
   },
 }));

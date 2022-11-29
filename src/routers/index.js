@@ -10,6 +10,7 @@ import Signup from "../pages/signup";
 // import ProductDetails from "../components/productDetails";
 import ProductDetail from "../pages/productDetails";
 import UploadFile from "../pages/uploadProduct";
+import PrivateRoute from "./protectedRoute";
 const Routers = () => {
   return (
     <>
@@ -21,8 +22,16 @@ const Routers = () => {
           <Route path="/consumer" element={<Consumer />} />
           <Route path="/signin" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/ProductDetails" element={<ProductDetail />} />
-          <Route path="/uploadProduct" element={<UploadFile />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
+
+          <Route
+            path="/uploadproduct"
+            element={
+              <PrivateRoute>
+                <UploadFile />
+              </PrivateRoute>
+            }
+          />
         </Routes>
 
         <Footer />

@@ -1,104 +1,155 @@
 import React from "react";
-import { Box, Typography } from "@material-ui/core";
+import {
+  Box,
+  FormControl,
+  FormHelperText,
+  Typography,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 
 import InputField from "../../components/inputField";
 import Button from "../../components/button";
 import UploadImage from "../../components/dropFileInput";
+import { useFormik } from "formik";
+import { addProductSchema } from "./schema";
+import { useDispatch, useSelector } from "react-redux";
+import { addProduct } from "../../redux/product/product.actions";
 
 const UploadFile = () => {
   const classes = useStyle();
-
-  const CHARACTER_LIMIT = 20;
-  const CHARACTER_LIMIT_PARA = 50;
-  const [values, setValues] = React.useState({
-    title: "",
-    para: "",
+  const dispatch = useDispatch();
+  const {
+    login: { userId },
+  } = useSelector((state) => state.registerSlice);
+  const formik = useFormik({
+    initialValues: {
+      title: "",
+      description: "",
+      rate: "",
+      quantity: "",
+      userId: userId,
+      file: "",
+    },
+    validationSchema: addProductSchema,
+    onSubmit: (values) => {
+      let fd = new FormData();
+      fd.append("title", values.title);
+      fd.append("description", values.description);
+      fd.append("rate", values.rate);
+      fd.append("quantity", values.quantity);
+      fd.append("userId", userId);
+      fd.append("image", values.file);
+      console.log(fd.get("image"));
+      dispatch(addProduct(fd));
+    },
   });
-
-  const handleChngTitl = (title) => (event) => {
-    setValues({ ...values, [title]: event.target.value });
-  };
-  const handleChngPara = (para) => (event) => {
-    setValues({ ...values, [para]: event.target.value });
-  };
-
+  console.log(formik.values.file);
   return (
-    <Box className={classes.mainMint}>
-      <Box className={classes.leftMint}>
-        <UploadImage />
-      </Box>
-
-      <Box className={classes.rightMint}>
-        <Box className={classes.title}>
-          <Typography variant="h2">Upload Items</Typography>
-        </Box>
-        <Box className={classes.fields}>
-          <InputField
-            placeholder="Product Name"
-            className={classes.tagInput}
-            // label="Limit"
-            inputProps={{
-              maxlength: CHARACTER_LIMIT,
-            }}
-            value={values.name}
-            onChange={handleChngTitl("Product")}
-          />
-          <InputField
-            placeholder="Rate"
-            className={classes.tagInput}
-            // label="Limit"
-            inputProps={{
-              maxlength: CHARACTER_LIMIT,
-            }}
-            value={values.name}
-            onChange={handleChngTitl("Product")}
-          />
-          <InputField
-            placeholder="Quality"
-            className={classes.tagInput}
-            // label="Limit"
-            inputProps={{
-              maxlength: CHARACTER_LIMIT,
-            }}
-            value={values.name}
-            onChange={handleChngTitl("Product")}
+    <Box>
+      <form onSubmit={formik.handleSubmit} className={classes.mainMint}>
+        <Box className={classes.leftMint}>
+          <UploadImage
+            formik={formik}
+            value={formik.values.file}
+            helperText={(formik.touched.file && formik.errors.file) || `&nbsp`}
+            error={formik.touched.file && Boolean(formik.errors.file)}
           />
         </Box>
 
-        <Box className={classes.roundBox}>
-          <InputField
-            placeholder=" Write Description "
-            rows={6}
-            multiline
-            style={{ height: 150 }}
-            className={classes.forArea}
-            inputProps={{
-              maxlength: CHARACTER_LIMIT_PARA,
-            }}
-            value={values.para}
-            onChange={handleChngPara("para")}
-          />
-        </Box>
-        <Box>
-          <Typography variant="body1" className={classes.pdingCount}>
-            {`${values.para.length}/${CHARACTER_LIMIT_PARA}`}
-          </Typography>
-        </Box>
-
-        <Box className={classes.btns}>
-          <Box>
-            <Button variant="contained" className={classes.connectButton}>
-              Save Data
-            </Button>
+        <Box className={classes.rightMint}>
+          <Box className={classes.title}>
+            <Typography variant="h2">Upload Items</Typography>
           </Box>
-          <Box>
-            <Button variant="outlined" className={classes.connectButton}>
-              discard
-            </Button>
+
+          <Box className={classes.fields}>
+            <FormControl>
+              <InputField
+                placeholder="Product Name"
+                className={classes.tagInput}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                name="title"
+                error={formik.touched.title && Boolean(formik.errors.title)}
+              />
+              {formik.touched.title && (
+                <FormHelperText error={true} className={classes.helper}>
+                  {formik.errors.title}
+                </FormHelperText>
+              )}
+            </FormControl>
+            <FormControl>
+              {" "}
+              <InputField
+                placeholder="Rate"
+                className={classes.tagInput}
+                type="number"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                name="rate"
+                helperText={formik.touched.rate && formik.errors.rate}
+                error={formik.touched.rate && Boolean(formik.errors.rate)}
+              />
+              {formik.touched.rate && (
+                <FormHelperText error={true} className={classes.helper}>
+                  {formik.errors.rate}
+                </FormHelperText>
+              )}
+            </FormControl>
+            <FormControl>
+              <InputField
+                placeholder="Quantity(KG)"
+                className={classes.tagInput}
+                // label="Limit"
+                type="number"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.quantity && Boolean(formik.errors.quantity)
+                }
+                name="quantity"
+              />
+              {formik.touched.quantity && (
+                <FormHelperText error={true} className={classes.helper}>
+                  {formik.errors.quantity}
+                </FormHelperText>
+              )}
+            </FormControl>
+            <FormControl>
+              <InputField
+                placeholder=" Write Description "
+                rows={6}
+                multiline
+                className={classes.forArea}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                name="description"
+              />
+              {formik.touched.description && (
+                <FormHelperText error={true} className={classes.helper}>
+                  {formik.errors.description}
+                </FormHelperText>
+              )}
+            </FormControl>
+          </Box>
+
+          <Box className={classes.btns}>
+            <Box>
+              <Button
+                type="submit"
+                variant="contained"
+                className={classes.connectButton}
+              >
+                Save Data
+              </Button>
+            </Box>
+            <Box>
+              <Button variant="outlined" className={classes.connectButton}>
+                discard
+              </Button>
+            </Box>
           </Box>
         </Box>
-      </Box>
+      </form>
     </Box>
   );
 };
@@ -202,6 +253,7 @@ const useStyle = makeStyles((theme) => ({
   forArea: {
     color: "black",
     borderColor: "black",
+    padding: "10px 10px",
   },
 
   two: {
@@ -243,5 +295,8 @@ const useStyle = makeStyles((theme) => ({
   },
   title: {
     marginTop: 50,
+  },
+  helper: {
+    fontSize: "12px",
   },
 }));

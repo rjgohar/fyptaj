@@ -1,10 +1,17 @@
 import { Box, makeStyles, Typography } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import CardProduct from ".";
 import image from "../../assets/dalchana.jpg";
+import { getAllProducts } from "../../redux/product/product.actions";
 
 export default function ProductsMap() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const { allProductsData } = useSelector((state) => state.Product);
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, [dispatch]);
   return (
     <Box className={classes.main}>
       <div className={classes.inner}>
@@ -18,17 +25,8 @@ export default function ProductsMap() {
         </Typography>
       </div>
       <div className={classes.gridSection}>
-        {Data.map(({ text, price, location, weight, image, link }, i) => {
-          return (
-            <CardProduct
-              key={i}
-              text={text}
-              price={price}
-              location={location}
-              weight={weight}
-              image={image}
-            />
-          );
+        {allProductsData?.map((item, i) => {
+          return <CardProduct key={i} {...item} />;
         })}
       </div>
     </Box>

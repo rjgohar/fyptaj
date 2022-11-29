@@ -1,26 +1,65 @@
 import { Box, makeStyles, Typography } from "@material-ui/core";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Divider from "@material-ui/core/Divider";
-import image from "../../assets/basmati_rice.jpg";
 import Select from "../select";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getSingleProduct } from "../../redux/product/product.actions";
+import BidPopup from "../bidPopup";
+import Buttons from "../buttons";
 export default function ProductDetails() {
   const classes = useStyles();
+  const { id } = useParams();
+  const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+  const {
+    singleProductData: {
+      productTitle,
+      productDescription,
+      rate,
+      quantity,
+      username,
+      status,
+      userId,
+      productId,
+      image,
+    },
+  } = useSelector((state) => state.Product);
+  const handleModalClose = () => setOpen(false);
+  const handleModalOpen = () => setOpen(true);
+  useEffect(() => {
+    dispatch(getSingleProduct(id));
+  }, [dispatch, id]);
+  console.log(userId, productId);
   return (
     <div className={classes.productDetails}>
+      <BidPopup
+        userId={userId}
+        productId={productId}
+        open={open}
+        price={rate}
+        quantity={quantity}
+        handleClose={handleModalClose}
+      />
+
       <Box>
-        <img className={classes.productimage} src={image} alt="iane" />
+        <img
+          className={classes.productimage}
+          src={`http://localhost:8000/static/${image}`}
+          alt="iane"
+        />
       </Box>
       <Box className={classes.productdata}>
         <div>
-          <Typography variant="h2">Wheat Sona</Typography>
+          <Typography variant="h2">{productTitle}</Typography>
         </div>
         <Divider className={classes.hrtag} />
         <div>
-          <Typography variant="body1"> Seller: Perera</Typography>
+          <Typography variant="body1"> Seller: {username}</Typography>
         </div>
         <Divider className={classes.hrtag} />
         <div>
-          <Typography variant="body1"> Avalaible Location: Moratuwa</Typography>
+          <Typography variant="body1"> {productDescription}</Typography>
         </div>
         <Divider className={classes.hrtag} />
       </Box>
@@ -31,24 +70,29 @@ export default function ProductDetails() {
             <Typography className="typo" variant="body1">
               price:
             </Typography>
-            <Typography variant="h4" style={{ paddingRight: 27 }}>
-              price
-            </Typography>
+            <Typography variant="h4">Rs.&nbsp;{rate}</Typography>
           </div>
           <div className="inner">
             {" "}
             <Typography className="typo" variant="body1">
               Status:
             </Typography>
-            <Typography variant="body1">In Stock</Typography>
+            <Typography variant="body1">
+              {status === 1 ? "In Stock" : "Out of Stock"}
+            </Typography>
           </div>
           <div className="inner">
             {" "}
             <Typography className="typo" variant="body1">
               Quantity:
             </Typography>
-            <Select style={{ marginRight: "27px !important" }} />
+            <Typography variant="body1">{quantity}&nbsp;KG</Typography>
           </div>
+          <Box display={"flex"} justifyContent="center">
+            <Buttons onClick={handleModalOpen} variant="contained">
+              Place Bid
+            </Buttons>
+          </Box>
         </Box>
       </Box>
     </div>
@@ -114,16 +158,13 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
+    padding: 10,
+    gap: 10,
 
     "& .inner": {
       display: "flex",
-      gap: 60,
-      padding: "0px 40px",
       justifyContent: "space-between",
-
-      "& .typo": {
-        paddingBottom: 10,
-      },
+      alignItems: "center",
     },
   },
 }));

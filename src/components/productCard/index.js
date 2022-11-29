@@ -5,38 +5,37 @@ import { Link } from "react-router-dom";
 import Buttons from "../buttons";
 
 export default function CardProduct({
-  text,
-  price,
-  location,
-  weight,
   image,
-  link,
+  rate,
+  quantity,
+  productTitle,
+  productId,
 }) {
   const classes = useStyles();
   return (
     <Box className={classes.main}>
       <div className={classes.heading}>
         <div>
-          <img className={classes.image} src={image} alt="pic" />
+          <img
+            className={classes.image}
+            src={`http://localhost:8000/static/${image}`}
+            alt="pic"
+          />
         </div>
-        <Typography variant="h3"> {text}</Typography>
+        <Typography variant="h3"> {productTitle}</Typography>
       </div>
 
       <div className={classes.sectionProduct}>
         <Typography variant="h4">price:</Typography>
-        <Typography variant="">RS {price}</Typography>
+        <Typography variant="">RS {rate}</Typography>
       </div>
       <div className={classes.sectionProduct}>
         <Typography variant="h4">Product Size:</Typography>
-        <Typography variant="">RS {weight}</Typography>
-      </div>
-      <div className={classes.sectionProduct}>
-        <Typography variant="h4">Location:</Typography>
-        <Typography variant=""> {location} </Typography>
+        <Typography variant="">{quantity} KG</Typography>
       </div>
 
       <div className={classes.btn}>
-        <Link to="/ProductDetails">
+        <Link to={`/product/${productId}`}>
           <Buttons className={classes.btnSe} variant="contained">
             {" "}
             preview here{" "}

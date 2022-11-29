@@ -2,13 +2,9 @@ import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { requestLoginUser, requestRegisterUser } from "../../Http/api.js";
 export const registerUser = createAsyncThunk(
   "registerUser/register",
-  async (payload, { dispatch }) => {
+  async (payload) => {
     try {
       const { data } = await requestRegisterUser(payload);
-
-      setTimeout(() => {
-        dispatch(resetRegisteringUser());
-      }, 3000);
       return data;
     } catch (error) {
       throw error;
@@ -27,9 +23,6 @@ export const LoginUser = createAsyncThunk(
     try {
       const { data } = await requestLoginUser(payload);
 
-      setTimeout(() => {
-        dispatch(requestLoginUser());
-      }, 3000);
       return data;
     } catch (error) {
       throw error;

@@ -1,12 +1,22 @@
 import { Box, makeStyles, Typography } from "@material-ui/core";
 import TextField from "../input";
 import React from "react";
+import { Alert } from "@material-ui/lab";
 
 import Buttons from "../buttons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Form, Formik } from "formik";
+import { loginSchema } from "./schema";
+import { useDispatch, useSelector } from "react-redux";
+import { LoginUser } from "../../redux/register/register.actions";
 
 export default function LoginSection() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { error, loginLoadingSucess } = useSelector(
+    (state) => state.registerSlice
+  );
   return (
     <Box mb={10} className={classes.mainContainer}>
       <Box pt={6}>
@@ -14,21 +24,97 @@ export default function LoginSection() {
           Sigin In
         </Typography>
       </Box>
-      <Box pt={8} pb={2}>
-        <Typography variant="body1"> Email Address / NIC *</Typography>
-        <TextField variant="outlined" placeholder="Email Address / NIC *" />
-      </Box>
-      <Box pt={3} pb={3}>
-        <Typography variant="body1">Password *</Typography>
-        <TextField variant="outlined" placeholder="Password" />
-      </Box>
-      <Box mt={3}>
-        <Link to="/">
-          <Buttons className={classes.ButtonSignin} variant="contained">
-            sign in
-          </Buttons>
-        </Link>
-      </Box>
+      <Formik
+        initialValues={{
+          email: "",
+          password: "",
+        }}
+        validationSchema={loginSchema}
+        onSubmit={(values) => {
+          // same shape as initial values
+          const payload = {
+            email: values.email,
+            password: values.password,
+          };
+
+          // send to server
+
+          dispatch(LoginUser(payload));
+          navigate("/");
+        }}
+      >
+        {({
+          errors,
+          touched,
+          values,
+          handleSubmit,
+          handleChange,
+          handleBlur,
+        }) => (
+          <Form>
+            {loginLoadingSucess && <div></div>}
+
+            {loginLoadingSucess ? (
+              <>
+                {" "}
+                {error ? (
+                  <Alert severity="error">{error}</Alert>
+                ) : (
+                  <Alert severity="success" style={{ fontSize: 16 }}>
+                    Log In success
+                  </Alert>
+                )}
+              </>
+            ) : null}
+
+            <br />
+
+            <Box>
+              <TextField
+                variant="outlined"
+                placeholder="Email"
+                type="email"
+                name="email"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.email}
+                fullWidth
+                label="Email"
+              />
+              {errors.email && touched.email ? (
+                <Typography>{errors.email}</Typography>
+              ) : null}
+            </Box>
+            <Box pt={2}>
+              <TextField
+                variant="outlined"
+                placeholder="Password"
+                type="password"
+                name="password"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.password}
+                fullWidth
+                label="Password"
+              />
+              {errors.password && touched.password ? (
+                <Typography>{errors.password}</Typography>
+              ) : null}
+            </Box>
+
+            <Box pt={2} display="flex" justifyContent="center">
+              <Buttons
+                className={classes.btn}
+                variant="contained"
+                color="primary"
+                type="submit"
+              >
+                Log In
+              </Buttons>
+            </Box>
+          </Form>
+        )}
+      </Formik>
       <Box mt={3} style={{ display: "flex" }}>
         <Typography className={classes.typo} variant="body1">
           New Customer?
@@ -67,5 +153,9 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 20,
     borderRadius: 25,
     fontWeight: 500,
+  },
+  formWrapper: {
+    display: "grid",
+    placeContent: "center",
   },
 }));

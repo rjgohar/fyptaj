@@ -8,10 +8,16 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import useStyles from "./Style";
 import { useNavigate } from "react-router-dom";
 import Buttons from "../buttons";
+import { useSelector } from "react-redux";
+import UserButton from "../userButton";
 
 const Header = () => {
   const classes = useStyles();
   const navigate = useNavigate();
+  const {
+    login: { username },
+    loginLoadingSucess,
+  } = useSelector((state) => state.registerSlice);
   function handleRoute(path) {
     navigate(path);
   }
@@ -77,17 +83,21 @@ const Header = () => {
                 about
               </Typography>
             </div>
-            <div style={{ display: "flex", gap: 20 }}>
+            <div style={{ display: "flex", gap: 20, alignItems: "center" }}>
               <ShoppingCartIcon className={classes.iconCard} />
-              <Buttons
-                variant="outlined"
-                onClick={() => {
-                  handleRoute("/signin");
-                }}
-                className={classes.bookingBtn}
-              >
-                sign In
-              </Buttons>
+              {!loginLoadingSucess ? (
+                <Buttons
+                  variant="outlined"
+                  onClick={() => {
+                    handleRoute("/signin");
+                  }}
+                  className={classes.bookingBtn}
+                >
+                  sign In
+                </Buttons>
+              ) : (
+                <UserButton />
+              )}
 
               <HamBurger />
             </div>

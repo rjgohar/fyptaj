@@ -9,11 +9,22 @@ import React, { useEffect } from "react";
 import Buttons from "../buttons";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 import { registerUser } from "../../redux/register/register.actions";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function SignupSection() {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   const classes = useStyles();
   const dispatch = useDispatch();
   const {
@@ -40,8 +51,14 @@ export default function SignupSection() {
   };
   const signUpSchema = yup.object({
     userName: yup.string().required("user name is required"),
-    passowrd: yup.string().required("password is required").min(5),
-    email: yup.string().email("Invalid email format").required("Required"),
+    passowrd: yup
+      .string()
+      .required("password is required")
+      .min(5),
+    email: yup
+      .string()
+      .email("Invalid email format")
+      .required("Required"),
   });
   const formik = useFormik({
     initialValues,
@@ -58,7 +75,7 @@ export default function SignupSection() {
   });
 
   return (
-    <Box mb={10} className={classes.mainContainer}>
+    <Box className={classes.mainContainer}>
       <Box pt={8} pb={1}>
         <Typography className={classes.typo} variant="body1">
           {" "}
@@ -82,7 +99,7 @@ export default function SignupSection() {
             error={formik.touched.userName && Boolean(formik.errors.userName)}
           />
         </Box>
-        <Box pt={2} pb={3}>
+        <Box pb={3}>
           <Typography className={classes.typo} variant="body1">
             {" "}
             Email Address / NIC
@@ -98,7 +115,7 @@ export default function SignupSection() {
             error={formik.touched.email && Boolean(formik.errors.email)}
           />
         </Box>
-        <Box pt={2} pb={3}>
+        <Box pb={3}>
           <Typography className={classes.typo} variant="body1">
             {" "}
             Password
@@ -117,6 +134,32 @@ export default function SignupSection() {
         <Typography
           style={{ color: "#fff", fontSize: "16px", textAlign: "center" }}
         ></Typography>
+        <div>
+          <div>
+            <Buttons
+              className={classes.mainbtn}
+              variant="contained"
+              aria-controls="simple-menu"
+              aria-haspopup="true"
+              onClick={handleClick}
+            >
+              Select option
+            </Buttons>
+            <Menu
+              className={classes.menulist}
+              id="simple-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>user</MenuItem>
+              <MenuItem onClick={handleClose}>Farmer</MenuItem>
+              <MenuItem onClick={handleClose}>user</MenuItem>
+            </Menu>
+          </div>
+        </div>
+
         <Box mt={3} style={{ display: "flex", justifyContent: "center" }}>
           <Buttons
             className={classes.ButtonSignin}
@@ -134,8 +177,8 @@ export default function SignupSection() {
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
     width: 700,
-    height: 600,
-
+    height: 650,
+    marginBottom: 80,
     borderRadius: "8px",
     background: theme.palette.background.alpha,
     display: "flex",
@@ -146,6 +189,18 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       width: "100%",
     },
+  },
+  menulist: {
+    "& .MuiListItem-root": {
+      width: 230,
+      color: "#000 ",
+      textTransform: "capitalize",
+    },
+  },
+
+  mainbtn: {
+    width: 220,
+    borderRadius: 5,
   },
   typo: {
     color: theme.palette.text.secondary,

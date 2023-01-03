@@ -16,12 +16,13 @@ export const requestRegisterUser = async (payload) => {
 
 export const requestLoginUser = async (payload) => {
   try {
-    const res = await MuiBAseUrl.post("/api/users/login", payload, {
+    const res = await MuiBAseUrl.post("api/users/login", payload, {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json;charset=UTF-8",
       },
     });
+    console.log(res, "res");
     return res;
   } catch (error) {
     throw error;
@@ -49,8 +50,8 @@ export const getAllProductsApi = async () => {
       },
     });
     return res;
-  } catch (err) {
-    throw err;
+  } catch (error) {
+    throw error;
   }
 };
 export const getSingleProductApi = async (payload) => {
@@ -66,6 +67,46 @@ export const getSingleProductApi = async (payload) => {
     throw error;
   }
 };
+
+// export const addProductApi = async (payload) => {
+//   try {
+//     const res = await MuiBAseUrl.post("/api/users/addProduct", payload, {
+//       headers: {
+//         Accept: "application/json",
+//         "Content-Type": "multipart/form-data",
+//       },
+//     });
+//     return res;
+//   } catch (err) {
+//     throw err;
+//   }
+// };
+// export const getAllProductsApi = async () => {
+//   try {
+//     const res = await MuiBAseUrl.get("/api/users/getAllProducts", {
+//       headers: {
+//         Accept: "application/json",
+//         "Content-Type": "application/json;charset=UTF-8",
+//       },
+//     });
+//     return res;
+//   } catch (err) {
+//     throw err;
+//   }
+// };
+// export const getSingleProductApi = async (payload) => {
+//   try {
+//     const res = await MuiBAseUrl.get(`/api/users/getSingleProduct/${payload}`, {
+//       headers: {
+//         Accept: "application/json",
+//         "Content-Type": "application/json;charset=UTF-8",
+//       },
+//     });
+//     return res;
+//   } catch (error) {
+//     throw error;
+//   }
+// };
 export const addBidApi = async (payload) => {
   try {
     const res = await MuiBAseUrl.post(`/api/users/addBid`, payload, {

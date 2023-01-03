@@ -7,10 +7,12 @@ import {
   Paper,
   Popper,
 } from "@material-ui/core";
+import React from "react";
 import { useState } from "react";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { useDispatch } from "react-redux";
 import { resetRegisteringUser } from "../../redux/register/register.slicer";
+import { Link } from "react-router-dom";
 const UserButton = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const classes = useStyles();
@@ -41,6 +43,7 @@ const UserButton = () => {
       </IconButton>
 
       <Menu
+        className={classes.maincont}
         id="simple-menu"
         anchorEl={anchorEl}
         keepMounted
@@ -56,6 +59,10 @@ const UserButton = () => {
         }}
       >
         <div>
+          <Link to="/myaccountformer">
+            <MenuItem className={classes.menu}>My Account</MenuItem>
+          </Link>
+
           <MenuItem className={classes.menu} onClick={handleLogout}>
             Logout{" "}
           </MenuItem>
@@ -69,6 +76,14 @@ export default UserButton;
 const useStyles = makeStyles((theme) => ({
   menu: {
     color: "#323232",
+  },
+
+  maincont: {
+    "& .MuiMenu-paper": {
+      position: "relative",
+      top: "58px !important",
+      width: "150px",
+    },
   },
   root: {
     "& .MuiSvgIcon-root": {

@@ -3,6 +3,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Logo from "../../assets/logo.jpg";
 import HamBurger from "../HamBurger/index";
+import React from "react";
 // import "./Header.css";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import useStyles from "./Style";
@@ -68,13 +69,6 @@ const Header = () => {
                 Consumer
               </Typography>
 
-              <Typography
-                variant="h2"
-                className="textHead"
-                onClick={() => handleRoute("/supplier")}
-              >
-                Supplier
-              </Typography>
               <Typography
                 variant="h2"
                 className="textHead"

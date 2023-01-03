@@ -14,18 +14,8 @@ export default function ProductsMap() {
   }, [dispatch]);
   return (
     <Box className={classes.main}>
-      <div className={classes.inner}>
-        <Typography className="typo1" variant="h2">
-          CONSUMER
-        </Typography>
-        <Typography className="typo2" variant="subtitle2">
-          No need to visit field to get grains!!! Just order here and and get
-          all kinds of garins deliverd at your doorstep. Why to wait? Go and
-          order.
-        </Typography>
-      </div>
       <div className={classes.gridSection}>
-        {allProductsData?.map((item, i) => {
+        {allProductsData.map((item, i) => {
           return <CardProduct key={i} {...item} />;
         })}
       </div>
@@ -34,9 +24,6 @@ export default function ProductsMap() {
 }
 
 const useStyles = makeStyles((theme) => ({
-  main: {
-    paddingTop: 180,
-  },
   gridSection: {
     width: "80%",
     margin: "0 auto",

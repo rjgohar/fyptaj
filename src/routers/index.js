@@ -1,3 +1,4 @@
+import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Footer from "../components/footer";
 import Header from "../components/header/Header";
@@ -11,6 +12,7 @@ import Signup from "../pages/signup";
 import ProductDetail from "../pages/productDetails";
 import UploadFile from "../pages/uploadProduct";
 import PrivateRoute from "./protectedRoute";
+import Fomerdashboard from "../pages/fomeraccountpage";
 const Routers = () => {
   return (
     <>
@@ -32,6 +34,7 @@ const Routers = () => {
               </PrivateRoute>
             }
           />
+          <Route path="/myaccountformer" element={<Fomerdashboard />} />
         </Routes>
 
         <Footer />

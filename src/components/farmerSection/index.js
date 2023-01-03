@@ -66,12 +66,6 @@ const useStyles = makeStyles((theme) => ({
 
 export const Data = [
   {
-    description: "Purchase Seeds, Pesticides & Fertilizer  ",
-  },
-  {
     description: "Sell Your Producing Material through Us",
-  },
-  {
-    description: "  Lend All of Heavy Machine And Tractros ",
   },
 ];

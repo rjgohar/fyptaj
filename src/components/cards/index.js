@@ -29,7 +29,7 @@ export default function Card({ text, description, link }) {
 
 const useStyles = makeStyles((theme) => ({
   main: {
-    width: 350,
+    width: 550,
 
     borderRadius: "5px",
     textAlign: "center",

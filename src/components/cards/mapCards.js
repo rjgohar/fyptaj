@@ -40,11 +40,4 @@ export const Data = [
 
     link: "/signin",
   },
-  {
-    text: "Consumer",
-    description:
-      " No need to visit field to get grains!!! Just order here and and get all kinds of grains deliverd at your doorstep. Why to wait? Go and order. ",
-
-    link: "/Consumer",
-  },
 ];

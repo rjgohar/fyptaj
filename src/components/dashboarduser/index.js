@@ -9,11 +9,10 @@ import Box from "@material-ui/core/Box";
 
 import { Link } from "react-router-dom";
 import clsx from "clsx";
-import ProfileFormer from "../../profileformer";
-import ProductsMap from "../../productCard/productMap";
-import OrderHistory from "../../orderhistory";
-import EarningFormer from "../../earningformer";
-
+import ProfileFormer from "../../components/profileformer";
+import ProductsMap from "../productCard/productMap";
+import OrderHistory from "../orderhistory";
+import EarningFormer from "../../components/earningformer";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -40,7 +39,7 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
-function VerticalTabs() {
+function DashboardUser() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   console.log(value, "valueeee");
@@ -114,7 +113,7 @@ function VerticalTabs() {
   );
 }
 
-export default VerticalTabs;
+export default DashboardUser;
 
 const useStyles = makeStyles((theme) => ({
   datasec: {

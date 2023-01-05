@@ -28,15 +28,9 @@ export const store = configureStore({
 });
 
 const ReduxProvider = ({ children }) => {
-  let persistor = persistStore(store);
-
   return (
     <>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          {children}
-        </PersistGate>
-      </Provider>
+      <Provider store={store}>{children}</Provider>
     </>
   );
 };

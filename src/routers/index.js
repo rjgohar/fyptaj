@@ -13,6 +13,7 @@ import ProductDetail from "../pages/productDetails";
 import UploadFile from "../pages/uploadProduct";
 import PrivateRoute from "./protectedRoute";
 import Fomerdashboard from "../pages/fomeraccountpage";
+import UserDashboard from "../pages/userdashboard";
 const Routers = () => {
   return (
     <>
@@ -35,6 +36,7 @@ const Routers = () => {
             }
           />
           <Route path="/myaccountformer" element={<Fomerdashboard />} />
+          <Route path="/myaccountuser" element={<UserDashboard />} />
         </Routes>
 
         <Footer />

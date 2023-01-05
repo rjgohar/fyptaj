@@ -10,9 +10,10 @@ import Box from "@material-ui/core/Box";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
 import ProfileFormer from "../../components/profileformer";
-import ProductsMap from "../productCard/productMap";
-import OrderHistory from "../orderhistory";
+import ProductsMap from "../../components/productCard/productMap";
+import OrderHistory from "../../components/orderhistory";
 import EarningFormer from "../../components/earningformer";
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -39,7 +40,7 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
-function DashboardUser() {
+function VerticalTabs() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   console.log(value, "valueeee");
@@ -59,7 +60,7 @@ function DashboardUser() {
           className={classes.tabs}
         >
           <Tab
-            label="profile"
+            label="farmer"
             class={clsx({
               [classes.forTabs]: true,
               [classes.selected]: value === 0,
@@ -70,22 +71,22 @@ function DashboardUser() {
               [classes.forTabs]: true,
               [classes.selected]: value === 1,
             })}
-            label="buyed products"
+            label="Products"
           />
-          <Tab
-            label="Purchasing History"
+          {/* <Tab
+            label=""
             className={clsx({
               [classes.forTabs]: true,
               [classes.selected]: value === 2,
             })}
-          />
-          {/* <Tab
-            label="earning"
+          /> */}
+          <Tab
+            label="users"
             className={clsx({
               [classes.forTabs]: true,
               [classes.selected]: value === 3,
             })}
-          /> */}
+          />
         </Tabs>
       </Box>
 
@@ -100,7 +101,7 @@ function DashboardUser() {
         </TabPanel>
         <TabPanel value={value} index={2} className={classes.panelContainer}>
           <div>
-            <OrderHistory />
+            <EarningFormer />
           </div>
         </TabPanel>
         <TabPanel value={value} index={3} className={classes.panelContainer}>
@@ -113,16 +114,16 @@ function DashboardUser() {
   );
 }
 
-export default DashboardUser;
+export default VerticalTabs;
 
 const useStyles = makeStyles((theme) => ({
   datasec: {
-    marginTop: 30,
+    marginTop: 90,
   },
   root: {
     flexGrow: 1,
     display: "flex",
-    flexDirection: "column",
+
     paddingTop: 40,
     gap: "10px",
     [theme.breakpoints.down("xs")]: {
@@ -131,7 +132,7 @@ const useStyles = makeStyles((theme) => ({
   },
   innerTabs: {
     display: "flex",
-
+    flexDirection: "column",
     [theme.breakpoints.down("xs")]: {
       paddingLeft: 20,
     },
@@ -162,7 +163,6 @@ const useStyles = makeStyles((theme) => ({
     " & .MuiTabs-flexContainerVertical": {
       display: "flex",
 
-      flexDirection: "row",
       [theme.breakpoints.down("sm")]: {
         flexWrap: "wrap",
       },

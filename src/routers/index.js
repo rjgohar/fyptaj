@@ -14,6 +14,7 @@ import UploadFile from "../pages/uploadProduct";
 import PrivateRoute from "./protectedRoute";
 import Fomerdashboard from "../pages/fomeraccountpage";
 import UserDashboard from "../pages/userdashboard";
+import AdminDashboard from "../components/adminDashboard";
 const Routers = () => {
   return (
     <>
@@ -37,6 +38,7 @@ const Routers = () => {
           />
           <Route path="/myaccountformer" element={<Fomerdashboard />} />
           <Route path="/myaccountuser" element={<UserDashboard />} />
+          <Route path="/adimindashboard" element={<AdminDashboard />} />
         </Routes>
 
         <Footer />

@@ -13,6 +13,9 @@ import ProfileFormer from "../../components/profileformer";
 import ProductsMap from "../../components/productCard/productMap";
 import OrderHistory from "../../components/orderhistory";
 import EarningFormer from "../../components/earningformer";
+import FarmeraDashboardTable from "../farmerdashboardtable";
+import ProductDashboardTable from "../userdasboardtable";
+import UserDashboardTable from "../userdashboardtable";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -92,21 +95,16 @@ function VerticalTabs() {
 
       <Box className={classes.datasec}>
         <TabPanel value={value} index={0} className={classes.panelContainer}>
-          <ProfileFormer />
+          <FarmeraDashboardTable />
         </TabPanel>
         <TabPanel value={value} index={1}>
           <div>
-            <ProductsMap />
+            <ProductDashboardTable />
           </div>
         </TabPanel>
         <TabPanel value={value} index={2} className={classes.panelContainer}>
           <div>
-            <EarningFormer />
-          </div>
-        </TabPanel>
-        <TabPanel value={value} index={3} className={classes.panelContainer}>
-          <div>
-            <EarningFormer />
+            <UserDashboardTable />
           </div>
         </TabPanel>
       </Box>
@@ -118,7 +116,31 @@ export default VerticalTabs;
 
 const useStyles = makeStyles((theme) => ({
   datasec: {
+    width: "70vw",
     marginTop: 90,
+    [theme.breakpoints.down("sm")]: {
+      width: "100vw",
+    },
+
+    "&::-webkit-scrollbar": {
+      width: 9,
+    },
+    /* Track */
+    "&::-webkit-scrollbar-track": {
+      background: "#FAFAFA",
+      border: " 1px solid #E6E6E6",
+      borderRadius: 20,
+    },
+    /* Handle */
+    "&::-webkit-scrollbar-thumb": {
+      background: "#C4C4C4",
+      borderRadius: 29,
+      border: "1px solid var(--black)",
+      /* Handle on hover */
+    },
+    "&::-webkit-scrollbar-thumb:hover": {
+      background: "#555",
+    },
   },
   root: {
     flexGrow: 1,

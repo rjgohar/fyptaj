@@ -72,13 +72,7 @@ function DashboardUser() {
             })}
             label="buyed products"
           />
-          <Tab
-            label="Purchasing History"
-            className={clsx({
-              [classes.forTabs]: true,
-              [classes.selected]: value === 2,
-            })}
-          />
+
           {/* <Tab
             label="earning"
             className={clsx({
@@ -93,19 +87,10 @@ function DashboardUser() {
         <TabPanel value={value} index={0} className={classes.panelContainer}>
           <ProfileFormer />
         </TabPanel>
-        <TabPanel value={value} index={1}>
-          <div>
-            <ProductsMap />
-          </div>
-        </TabPanel>
+        <OrderHistory />
         <TabPanel value={value} index={2} className={classes.panelContainer}>
           <div>
             <OrderHistory />
-          </div>
-        </TabPanel>
-        <TabPanel value={value} index={3} className={classes.panelContainer}>
-          <div>
-            <EarningFormer />
           </div>
         </TabPanel>
       </Box>

@@ -6,6 +6,7 @@ export const requestRegisterUser = async (payload) => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json;charset=UTF-8",
+        "Access-Control-Allow-Origin": "*",
       },
     });
     return res;
@@ -20,6 +21,7 @@ export const requestLoginUser = async (payload) => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json;charset=UTF-8",
+        "Access-Control-Allow-Origin": "*",
       },
     });
     console.log(res, "res");

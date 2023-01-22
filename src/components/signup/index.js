@@ -1,7 +1,10 @@
 import {
   Box,
   CircularProgress,
+  FormControl,
+  InputLabel,
   makeStyles,
+  Select,
   Typography,
 } from "@material-ui/core";
 import TextField from "../input";
@@ -48,17 +51,12 @@ export default function SignupSection() {
     userName: "",
     passowrd: "",
     email: "",
+    role: "",
   };
   const signUpSchema = yup.object({
     userName: yup.string().required("user name is required"),
-    passowrd: yup
-      .string()
-      .required("password is required")
-      .min(5),
-    email: yup
-      .string()
-      .email("Invalid email format")
-      .required("Required"),
+    passowrd: yup.string().required("password is required").min(5),
+    email: yup.string().email("Invalid email format").required("Required"),
   });
   const formik = useFormik({
     initialValues,
@@ -69,6 +67,7 @@ export default function SignupSection() {
         email: values.email,
         username: values.userName,
         password: values.passowrd,
+        role: values.role,
       };
       dispatch(registerUser(payload));
     },
@@ -136,27 +135,23 @@ export default function SignupSection() {
         ></Typography>
         <div>
           <div>
-            <Buttons
-              className={classes.mainbtn}
-              variant="contained"
-              aria-controls="simple-menu"
-              aria-haspopup="true"
-              onClick={handleClick}
-            >
-              Select option
-            </Buttons>
-            <Menu
-              className={classes.menulist}
-              id="simple-menu"
-              anchorEl={anchorEl}
-              keepMounted
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={handleClose}>user</MenuItem>
-              <MenuItem onClick={handleClose}>Farmer</MenuItem>
-              <MenuItem onClick={handleClose}>user</MenuItem>
-            </Menu>
+            <FormControl variant="outlined" className={classes.formControl}>
+              <InputLabel id="demo-simple-select-outlined-label">
+                Role
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-outlined-label"
+                id="demo-simple-select-outlined"
+                onChange={formik.handleChange}
+                label="Age"
+                name="role"
+                MenuProps={{ className: classes.menulist }}
+              >
+                <MenuItem value={"user"}>User</MenuItem>
+                <MenuItem value={"farmer"}>Farmer</MenuItem>
+                <MenuItem value={"admin"}>Admin</MenuItem>
+              </Select>
+            </FormControl>
           </div>
         </div>
 
@@ -191,11 +186,10 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   menulist: {
-    "& .MuiListItem-root": {
-      width: 230,
-      color: "#000 ",
-      textTransform: "capitalize",
+    "& .MuiMenu-paper": {
+      background: "#323232",
     },
+    color: "",
   },
 
   mainbtn: {
@@ -212,5 +206,11 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 20,
     borderRadius: 25,
     fontWeight: 500,
+  },
+  formControl: {
+    width: "100%",
+    "& .MuiSelect-icon": {
+      top: 0,
+    },
   },
 }));

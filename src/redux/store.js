@@ -2,21 +2,10 @@ import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 
 import React from "react";
-import { persistReducer } from "redux-persist";
-import storageSession from "redux-persist/lib/storage/session";
-import persistStore from "redux-persist/es/persistStore";
-import { PersistGate } from "redux-persist/integration/react";
 import rootReducer from "./rootReducer";
 
-const persistConfig = {
-  key: "root",
-  storage: storageSession,
-};
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: rootReducer,
 
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -28,15 +17,9 @@ export const store = configureStore({
 });
 
 const ReduxProvider = ({ children }) => {
-  let persistor = persistStore(store);
-
   return (
     <>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          {children}
-        </PersistGate>
-      </Provider>
+      <Provider store={store}>{children}</Provider>
     </>
   );
 };

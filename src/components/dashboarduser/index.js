@@ -9,11 +9,10 @@ import Box from "@material-ui/core/Box";
 
 import { Link } from "react-router-dom";
 import clsx from "clsx";
-import ProfileFormer from "../../profileformer";
-import ProductsMap from "../../productCard/productMap";
-import OrderHistory from "../../orderhistory";
-import EarningFormer from "../../earningformer";
-
+import ProfileFormer from "../../components/profileformer";
+import ProductsMap from "../productCard/productMap";
+import OrderHistory from "../orderhistory";
+import EarningFormer from "../../components/earningformer";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -40,7 +39,7 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
-function VerticalTabs() {
+function DashboardUser() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   console.log(value, "valueeee");
@@ -71,22 +70,16 @@ function VerticalTabs() {
               [classes.forTabs]: true,
               [classes.selected]: value === 1,
             })}
-            label="Uploaded products"
+            label="buyed products"
           />
-          <Tab
-            label="orders History"
-            className={clsx({
-              [classes.forTabs]: true,
-              [classes.selected]: value === 2,
-            })}
-          />
-          <Tab
+
+          {/* <Tab
             label="earning"
             className={clsx({
               [classes.forTabs]: true,
               [classes.selected]: value === 3,
             })}
-          />
+          /> */}
         </Tabs>
       </Box>
 
@@ -94,19 +87,10 @@ function VerticalTabs() {
         <TabPanel value={value} index={0} className={classes.panelContainer}>
           <ProfileFormer />
         </TabPanel>
-        <TabPanel value={value} index={1}>
-          <div>
-            <ProductsMap />
-          </div>
-        </TabPanel>
+        <OrderHistory />
         <TabPanel value={value} index={2} className={classes.panelContainer}>
           <div>
             <OrderHistory />
-          </div>
-        </TabPanel>
-        <TabPanel value={value} index={3} className={classes.panelContainer}>
-          <div>
-            <EarningFormer />
           </div>
         </TabPanel>
       </Box>
@@ -114,7 +98,7 @@ function VerticalTabs() {
   );
 }
 
-export default VerticalTabs;
+export default DashboardUser;
 
 const useStyles = makeStyles((theme) => ({
   datasec: {

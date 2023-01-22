@@ -9,10 +9,13 @@ import Box from "@material-ui/core/Box";
 
 import { Link } from "react-router-dom";
 import clsx from "clsx";
-import ProfileFormer from "../../profileformer";
-import ProductsMap from "../../productCard/productMap";
-import OrderHistory from "../../orderhistory";
-import EarningFormer from "../../earningformer";
+import ProfileFormer from "../../components/profileformer";
+import ProductsMap from "../../components/productCard/productMap";
+import OrderHistory from "../../components/orderhistory";
+import EarningFormer from "../../components/earningformer";
+import FarmeraDashboardTable from "../farmerdashboardtable";
+import ProductDashboardTable from "../userdasboardtable";
+import UserDashboardTable from "../userdashboardtable";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -60,7 +63,7 @@ function VerticalTabs() {
           className={classes.tabs}
         >
           <Tab
-            label="profile"
+            label="farmer"
             class={clsx({
               [classes.forTabs]: true,
               [classes.selected]: value === 0,
@@ -71,17 +74,17 @@ function VerticalTabs() {
               [classes.forTabs]: true,
               [classes.selected]: value === 1,
             })}
-            label="Uploaded products"
+            label="Products"
           />
-          <Tab
-            label="orders History"
+          {/* <Tab
+            label=""
             className={clsx({
               [classes.forTabs]: true,
               [classes.selected]: value === 2,
             })}
-          />
+          /> */}
           <Tab
-            label="earning"
+            label="users"
             className={clsx({
               [classes.forTabs]: true,
               [classes.selected]: value === 3,
@@ -92,21 +95,16 @@ function VerticalTabs() {
 
       <Box className={classes.datasec}>
         <TabPanel value={value} index={0} className={classes.panelContainer}>
-          <ProfileFormer />
+          <FarmeraDashboardTable />
         </TabPanel>
         <TabPanel value={value} index={1}>
           <div>
-            <ProductsMap />
+            <ProductDashboardTable />
           </div>
         </TabPanel>
         <TabPanel value={value} index={2} className={classes.panelContainer}>
           <div>
-            <OrderHistory />
-          </div>
-        </TabPanel>
-        <TabPanel value={value} index={3} className={classes.panelContainer}>
-          <div>
-            <EarningFormer />
+            <UserDashboardTable />
           </div>
         </TabPanel>
       </Box>
@@ -118,12 +116,36 @@ export default VerticalTabs;
 
 const useStyles = makeStyles((theme) => ({
   datasec: {
-    marginTop: 30,
+    width: "70vw",
+    marginTop: 90,
+    [theme.breakpoints.down("sm")]: {
+      width: "100vw",
+    },
+
+    "&::-webkit-scrollbar": {
+      width: 9,
+    },
+    /* Track */
+    "&::-webkit-scrollbar-track": {
+      background: "#FAFAFA",
+      border: " 1px solid #E6E6E6",
+      borderRadius: 20,
+    },
+    /* Handle */
+    "&::-webkit-scrollbar-thumb": {
+      background: "#C4C4C4",
+      borderRadius: 29,
+      border: "1px solid var(--black)",
+      /* Handle on hover */
+    },
+    "&::-webkit-scrollbar-thumb:hover": {
+      background: "#555",
+    },
   },
   root: {
     flexGrow: 1,
     display: "flex",
-    flexDirection: "column",
+
     paddingTop: 40,
     gap: "10px",
     [theme.breakpoints.down("xs")]: {
@@ -132,7 +154,7 @@ const useStyles = makeStyles((theme) => ({
   },
   innerTabs: {
     display: "flex",
-
+    flexDirection: "column",
     [theme.breakpoints.down("xs")]: {
       paddingLeft: 20,
     },
@@ -163,7 +185,6 @@ const useStyles = makeStyles((theme) => ({
     " & .MuiTabs-flexContainerVertical": {
       display: "flex",
 
-      flexDirection: "row",
       [theme.breakpoints.down("sm")]: {
         flexWrap: "wrap",
       },

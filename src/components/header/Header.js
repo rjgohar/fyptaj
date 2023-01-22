@@ -78,7 +78,6 @@ const Header = () => {
               </Typography>
             </div>
             <div style={{ display: "flex", gap: 20, alignItems: "center" }}>
-              <ShoppingCartIcon className={classes.iconCard} />
               {!loginLoadingSucess ? (
                 <Buttons
                   variant="outlined"

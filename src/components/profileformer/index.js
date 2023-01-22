@@ -17,6 +17,7 @@ import { alpha, makeStyles } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 
 import Button from "../buttons";
+import Buttons from "../buttons";
 const ProfileFormer = (props) => {
   const classes = useStyles();
   const navigate = useNavigate();
@@ -108,6 +109,12 @@ const ProfileFormer = (props) => {
             </Box>
             <Divider className={classes.cardDivider} variant="middle" />
           </CardContent>
+
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Buttons className={classes.btnedit} variant="contained">
+              edit profile
+            </Buttons>
+          </div>
         </CardActionArea>
       </MuiCard>
     </>
@@ -172,7 +179,11 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-evenly",
     padding: "30px 0px",
   },
-
+  btnedit: {
+    margin: "10px 0px",
+    width: "200px",
+    borderRadius: 15,
+  },
   primaryBtn: {
     textTransform: "initial",
   },

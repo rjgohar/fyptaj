@@ -110,5 +110,10 @@ const useStyles = makeStyles((theme) => ({
   },
   HeaderData: {},
   LogoData: {},
+
+  logo: {
+    width: 200,
+    height: 60,
+  },
 }));
 export default useStyles;

@@ -6,7 +6,7 @@ import MailIcon from "@material-ui/icons/Mail";
 import HomeIcon from "@material-ui/icons/Home";
 import PhoneIcon from "@material-ui/icons/Phone";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
-import logo from "../../assets/logo.jpg";
+import logo from "../../assets/logo.svg";
 import Buttons from "../buttons";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import InstagramIcon from "@material-ui/icons/Instagram";

@@ -15,6 +15,7 @@ import PrivateRoute from "./protectedRoute";
 import Fomerdashboard from "../pages/fomeraccountpage";
 import UserDashboard from "../pages/userdashboard";
 import AdminDashboard from "../components/adminDashboard";
+import AboutUs from "../pages/aboutus";
 const Routers = () => {
   return (
     <>
@@ -27,7 +28,7 @@ const Routers = () => {
           <Route path="/signin" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/product/:id" element={<ProductDetail />} />
-
+          <Route path="/aboutus" element={<AboutUs />} />
           <Route
             path="/uploadproduct"
             element={

@@ -15,8 +15,9 @@ import Buttons from "../buttons";
 import InputField from "../inputField";
 import { bidSchema } from "./schema";
 import CancelIcon from "@material-ui/icons/Cancel";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addBid } from "../../redux/product/product.actions";
+import { PlaceBid } from "../../redux/userInWallet/inWallet.actions";
 const BidPopup = ({
   userId,
   productId,
@@ -24,21 +25,38 @@ const BidPopup = ({
   quantity,
   open,
   handleClose,
+  highestBid,
+  reservePrice,
+  auctionId,
+  endTime,
 }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const { message } = useSelector((state) => state.inWallet);
+  console.log(Boolean(highestBid));
+  const currentTime = Math.floor(Date.now() / 1000);
+  const futureTime = currentTime + 24 * 60 * 60;
   const formik = useFormik({
     initialValues: {
       userId: userId,
       productId: productId,
       price: "",
       quantity: "",
+      reserve: highestBid || reservePrice,
     },
-    validationSchema: bidSchema(price, quantity),
+    validationSchema: bidSchema,
+    enableReinitialize: true,
     onSubmit: (values) => {
-      dispatch(addBid(values));
+      let payload = {
+        userId,
+        productId,
+        price: values.price,
+        endTime: Boolean(highestBid) ? endTime : futureTime,
+      };
+      dispatch(PlaceBid(payload));
     },
   });
+
   return (
     <Dialog open={open} onClose={handleClose}>
       <Box fontSize={14} display="flex" justifyContent={"flex-end"}>
@@ -54,6 +72,11 @@ const BidPopup = ({
         <Typography align="center" className={classes.title}>
           Place your bid
         </Typography>
+        <Box>
+          <Typography align="center" className={classes.title}>
+            {message}
+          </Typography>
+        </Box>
       </DialogTitle>
       <DialogContent>
         <form className={classes.form} onSubmit={formik.handleSubmit}>
@@ -67,7 +90,6 @@ const BidPopup = ({
               name="price"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              min="11"
             />
             {formik.touched.price && (
               <FormHelperText error={true} className={classes.helper}>
@@ -75,7 +97,7 @@ const BidPopup = ({
               </FormHelperText>
             )}
           </FormControl>
-          <FormControl>
+          {/* <FormControl>
             <Typography style={{ color: "#000000" }}>Quantity</Typography>
             <InputField
               placeholder={quantity}
@@ -90,7 +112,7 @@ const BidPopup = ({
                 {formik.errors.quantity}
               </FormHelperText>
             )}
-          </FormControl>
+          </FormControl> */}
           <Box display={"flex"} justifyContent="center" pb={1}>
             <Buttons variant="contained" type="submit">
               Place Bid

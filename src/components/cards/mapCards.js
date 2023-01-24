@@ -38,6 +38,6 @@ export const Data = [
     description:
       "Sell your wide variety of products related to farming, through our platform. We have millions of farmers connected from all parts of country.",
 
-    link: "/signin",
+    link: "/consumer",
   },
 ];

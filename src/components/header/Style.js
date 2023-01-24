@@ -6,6 +6,10 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     alignItems: "center",
   },
+  AppBar: {
+    width: "100%",
+    background: theme.palette.background.main,
+  },
   logoDiv: {
     display: "flex",
     justifyContent: "center",

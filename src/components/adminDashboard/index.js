@@ -9,10 +9,7 @@ import Box from "@material-ui/core/Box";
 
 import { Link } from "react-router-dom";
 import clsx from "clsx";
-import ProfileFormer from "../../components/profileformer";
-import ProductsMap from "../../components/productCard/productMap";
-import OrderHistory from "../../components/orderhistory";
-import EarningFormer from "../../components/earningformer";
+
 import FarmeraDashboardTable from "../farmerdashboardtable";
 import ProductDashboardTable from "../userdasboardtable";
 import UserDashboardTable from "../userdashboardtable";

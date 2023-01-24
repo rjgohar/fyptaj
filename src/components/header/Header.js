@@ -1,7 +1,7 @@
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import Logo from "../../assets/logo.jpg";
+import Logo from "../../assets/logo.svg";
 import HamBurger from "../HamBurger/index";
 import React from "react";
 // import "./Header.css";
@@ -72,7 +72,7 @@ const Header = () => {
               <Typography
                 variant="h2"
                 className="textHead"
-                onClick={() => handleRoute("/about")}
+                onClick={() => handleRoute("/aboutus")}
               >
                 about
               </Typography>

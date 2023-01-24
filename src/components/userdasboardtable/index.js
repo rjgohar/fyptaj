@@ -1,16 +1,24 @@
-import React from "react";
 import { TableCell, TableRow } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import pic from "../../assets/pic.png";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
+import { getAllProducts } from "../../redux/product/product.actions";
 import BasicTable from "../table";
 import Buttons from "../buttons";
-const columns = ["id", " Name", "image", " bio", "Action"];
+import { Link } from "react-router-dom";
+const columns = ["productId", " product Title", "image", " price", "Action"];
 
 const clients = ["1", "ronny ", { type: "img", src: pic }, "sada haq"];
 const rows = [clients, clients, clients];
 
 const ProductDashboardTable = () => {
+  const dispatch = useDispatch();
+  const { allProductsData } = useSelector((state) => state.Product);
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, [dispatch]);
   const classes = useStyles();
   const head = columns.map((col, id) => (
     <TableCell key={id} className={classes.col}>
@@ -18,32 +26,39 @@ const ProductDashboardTable = () => {
     </TableCell>
   ));
 
-  const body = rows.map((row, id) => (
-    <TableRow key={id}>
-      {row.map((col) =>
-        col.type ? (
-          <TableCell className={classes.col}>
-            <img src={`${col.src}`} className={classes.image} />
-          </TableCell>
-        ) : (
-          <TableCell className={classes.col}>{col}</TableCell>
-        )
-      )}
-      <TableCell>
-        <Buttons className={classes.btnview} variant="outlined">
-          view{" "}
-        </Buttons>{" "}
-        <Buttons variant="outlined">delete</Buttons>
-      </TableCell>
-    </TableRow>
-  ));
+  const body = allProductsData.map(
+    ({ image, rate, quantity, productTitle, productId }, id) => (
+      <TableRow key={id}>
+        <TableCell className={classes.col}>{productId}</TableCell>
+        <TableCell className={classes.col}>{productTitle}</TableCell>
+        <TableCell className={classes.col}>
+          {" "}
+          <img
+            src={`http://localhost:8000/static/${image}`}
+            className={classes.image}
+          />{" "}
+        </TableCell>
+
+        <TableCell className={classes.col}>{rate}</TableCell>
+
+        <TableCell>
+          <Link to="/product/`${productId}`">
+            <Buttons className={classes.btnview} variant="outlined">
+              view{" "}
+            </Buttons>{" "}
+          </Link>
+          <Buttons variant="outlined">delete</Buttons>
+        </TableCell>
+      </TableRow>
+    )
+  );
   return <BasicTable tableName=" Product's" head={head} body={body} />;
 };
 export default ProductDashboardTable;
 const useStyles = makeStyles((theme) => ({
   image: {
     width: 100,
-    height: 100,
+    height: 60,
     borderRadius: 50,
   },
   textcell: {

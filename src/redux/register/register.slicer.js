@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { LoginUser, registerUser } from "./register.actions";
+import { useNavigate } from "react-router-dom";
+import { checkSession, LoginUser, registerUser } from "./register.actions";
 const initialState = {
   isUserRegistering: false,
   isUserRegisteringSuccess: false,
@@ -15,6 +16,7 @@ const initialState = {
 };
 
 const handleFulfillement = (state, action) => {
+  console.log(action.payload.token);
   localStorage.setItem("JWTtoken", action.payload.token);
 };
 
@@ -51,6 +53,24 @@ const registerSlice = createSlice({
       state.loginLoading = false;
       state.loginLoadingFailed = true;
       state.error = "";
+      state.isAuthenticated = false;
+    },
+    ////////////////////////////////
+    [checkSession.pending]: (state) => {
+      state.loginLoading = true;
+      state.error = "";
+    },
+    [checkSession.fulfilled]: (state, action) => {
+      state.loginLoading = false;
+      state.loginLoadingSucess = true;
+
+      state.login = action.payload.userInfo;
+      handleFulfillement(state, action);
+    },
+    [checkSession.rejected]: (state, action) => {
+      state.loginLoading = false;
+      state.loginLoadingFailed = true;
+      state.error = action;
       state.isAuthenticated = false;
     },
   },

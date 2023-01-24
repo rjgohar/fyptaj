@@ -16,9 +16,10 @@ import Fomerdashboard from "../pages/fomeraccountpage";
 import UserDashboard from "../pages/userdashboard";
 import AdminDashboard from "../components/adminDashboard";
 import AboutUs from "../pages/aboutus";
+import UniversalHooks from "../components/UniversalHooks";
 const Routers = () => {
   return (
-    <>
+    <UniversalHooks>
       <Router>
         <Header />
         <Routes>
@@ -44,7 +45,7 @@ const Routers = () => {
 
         <Footer />
       </Router>
-    </>
+    </UniversalHooks>
   );
 };
 

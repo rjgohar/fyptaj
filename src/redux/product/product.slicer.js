@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   addBid,
   addProduct,
+  deleteProduct,
   getAllProducts,
   getSingleProduct,
 } from "./product.actions";
@@ -25,6 +26,10 @@ const initialState = {
   isBidAddLoadingFailed: false,
   isBidAdded: false,
   bidData: [],
+  ////////////////
+  isProductDeleteLoading: false,
+  isProductDeleted: false,
+  isProductDeleteFailed: false,
 };
 
 const ProductSlice = createSlice({
@@ -79,6 +84,18 @@ const ProductSlice = createSlice({
     [addBid.rejected]: (state, action) => {
       state.isBidAddLoading = false;
       state.isBidAddLoadingFailed = true;
+    },
+    ////////////////////////////////
+    [deleteProduct.pending]: (state, action) => {
+      state.isProductDeleteLoading = true;
+    },
+    [deleteProduct.fulfilled]: (state, action) => {
+      state.isProductDeleteLoading = false;
+      state.isProductDeleted = true;
+    },
+    [deleteProduct.rejected]: (state, action) => {
+      state.isProductDeleteLoading = false;
+      state.isProductDeleteFailed = true;
     },
   },
 });

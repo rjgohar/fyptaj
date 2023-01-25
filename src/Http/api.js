@@ -24,7 +24,6 @@ export const requestLoginUser = async (payload) => {
         "Access-Control-Allow-Origin": "*",
       },
     });
-    console.log(res, "res");
     return res;
   } catch (error) {
     throw error;
@@ -131,6 +130,18 @@ export const addBidApi = async (payload) => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json;charset=UTF-8",
+      },
+    });
+    return res;
+  } catch (error) {
+    throw error;
+  }
+};
+export const checkSessionApi = async (payload) => {
+  try {
+    const res = await MuiBAseUrl.get("api/users/checkSession", {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("JWTtoken"),
       },
     });
     return res;

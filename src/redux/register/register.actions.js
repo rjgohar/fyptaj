@@ -1,5 +1,9 @@
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
-import { requestLoginUser, requestRegisterUser } from "../../Http/api.js";
+import {
+  checkSessionApi,
+  requestLoginUser,
+  requestRegisterUser,
+} from "../../Http/api.js";
 export const registerUser = createAsyncThunk(
   "registerUser/register",
   async (payload) => {
@@ -23,6 +27,18 @@ export const LoginUser = createAsyncThunk(
     try {
       const { data } = await requestLoginUser(payload);
 
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
+
+export const checkSession = createAsyncThunk(
+  "loginUser/checkSession",
+  async () => {
+    try {
+      const { data } = await checkSessionApi();
       return data;
     } catch (error) {
       throw error;

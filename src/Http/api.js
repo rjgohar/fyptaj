@@ -191,3 +191,12 @@ export const AddBidOn = async (payload) => {
     throw error;
   }
 };
+
+export const deleteProductsApi = async (payload) => {
+  try {
+    const res = await MuiBAseUrl.get(`api/users/deleteProduct/${payload}`);
+    return res;
+  } catch (error) {
+    throw error;
+  }
+};

@@ -51,6 +51,7 @@ const BidPopup = ({
         userId,
         productId,
         price: values.price,
+        auctionId,
         endTime: Boolean(highestBid) ? endTime : futureTime,
       };
       dispatch(PlaceBid(payload));

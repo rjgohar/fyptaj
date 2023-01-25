@@ -4,6 +4,7 @@ import Routers from "./routers";
 import { theme } from "./theme";
 import React from "react";
 import ReduxProvider from "./redux/store";
+import UniversalHooks from "./components/UniversalHooks";
 
 function App() {
   return (

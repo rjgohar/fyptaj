@@ -1,6 +1,6 @@
-import { Box, makeStyles, Typography } from "@material-ui/core";
+import { Box, FormHelperText, makeStyles, Typography } from "@material-ui/core";
 import TextField from "../input";
-import React from "react";
+import React, { useEffect } from "react";
 import { Alert } from "@material-ui/lab";
 
 import Buttons from "../buttons";
@@ -14,12 +14,18 @@ export default function LoginSection() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { error, loginLoadingSucess } = useSelector(
+  const { error, loginLoadingSucess, loginLoadingFailed } = useSelector(
     (state) => state.registerSlice
   );
+
+  useEffect(() => {
+    if (loginLoadingSucess) {
+      navigate("/");
+    }
+  }, [loginLoadingSucess]);
   return (
     <Box mb={10} className={classes.mainContainer}>
-      <Box pt={6}>
+      <Box pt={6} pb={3}>
         <Typography variant="h2" className={classes.typo}>
           Sigin In
         </Typography>
@@ -31,16 +37,11 @@ export default function LoginSection() {
         }}
         validationSchema={loginSchema}
         onSubmit={(values) => {
-          // same shape as initial values
           const payload = {
             email: values.email,
             password: values.password,
           };
-
-          // send to server
-
           dispatch(LoginUser(payload));
-          navigate("/");
         }}
       >
         {({
@@ -52,20 +53,17 @@ export default function LoginSection() {
           handleBlur,
         }) => (
           <Form>
-            {loginLoadingSucess && <div></div>}
+            {loginLoadingSucess && (
+              <Alert severity="success" style={{ fontSize: 16 }}>
+                Log In success
+              </Alert>
+            )}
 
-            {loginLoadingSucess ? (
-              <>
-                {" "}
-                {error ? (
-                  <Alert severity="error">{error}</Alert>
-                ) : (
-                  <Alert severity="success" style={{ fontSize: 16 }}>
-                    Log In success
-                  </Alert>
-                )}
-              </>
-            ) : null}
+            {loginLoadingFailed && (
+              <Alert severity="error" style={{ fontSize: 16 }}>
+                Invalid Email or Password
+              </Alert>
+            )}
 
             <br />
 
@@ -82,7 +80,9 @@ export default function LoginSection() {
                 label="Email"
               />
               {errors.email && touched.email ? (
-                <Typography>{errors.email}</Typography>
+                <FormHelperText className={classes.helpertext} error>
+                  {errors.email}
+                </FormHelperText>
               ) : null}
             </Box>
             <Box pt={2}>
@@ -98,7 +98,9 @@ export default function LoginSection() {
                 label="Password"
               />
               {errors.password && touched.password ? (
-                <Typography>{errors.password}</Typography>
+                <FormHelperText className={classes.helpertext} error>
+                  {errors.password}
+                </FormHelperText>
               ) : null}
             </Box>
 
@@ -157,5 +159,8 @@ const useStyles = makeStyles((theme) => ({
   formWrapper: {
     display: "grid",
     placeContent: "center",
+  },
+  helpertext: {
+    fontSize: 12,
   },
 }));

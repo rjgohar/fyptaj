@@ -4,7 +4,10 @@ import pic from "../../assets/pic.png";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getAllProducts } from "../../redux/product/product.actions";
+import {
+  deleteProduct,
+  getAllProducts,
+} from "../../redux/product/product.actions";
 import BasicTable from "../table";
 import Buttons from "../buttons";
 import { Link } from "react-router-dom";
@@ -25,7 +28,10 @@ const ProductDashboardTable = () => {
       {col}
     </TableCell>
   ));
-
+  const handleProductDelete = (id) => {
+    dispatch(deleteProduct(id));
+    dispatch(getAllProducts());
+  };
   const body = allProductsData.map(
     ({ image, rate, quantity, productTitle, productId }, id) => (
       <TableRow key={id}>
@@ -47,7 +53,12 @@ const ProductDashboardTable = () => {
               view{" "}
             </Buttons>{" "}
           </Link>
-          <Buttons variant="outlined">delete</Buttons>
+          <Buttons
+            variant="outlined"
+            onClick={handleProductDelete.bind(this, productId)}
+          >
+            delete
+          </Buttons>
         </TableCell>
       </TableRow>
     )

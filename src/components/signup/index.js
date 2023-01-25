@@ -149,7 +149,6 @@ export default function SignupSection() {
               >
                 <MenuItem value={"user"}>User</MenuItem>
                 <MenuItem value={"farmer"}>Farmer</MenuItem>
-                <MenuItem value={"admin"}>Admin</MenuItem>
               </Select>
             </FormControl>
           </div>

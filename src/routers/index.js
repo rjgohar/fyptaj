@@ -16,6 +16,7 @@ import PrivateRoute from "./protectedRoute";
 import AdminDashboard from "../components/adminDashboard";
 import AboutUs from "../pages/aboutus";
 import Usersdashboard from "../pages/profilepage";
+import EditProfile from "../components/editProfile";
 const Routers = () => {
   return (
     <>
@@ -40,6 +41,7 @@ const Routers = () => {
           <Route path="/myprofile/:user" element={<Usersdashboard />} />
 
           <Route path="/adimindashboard" element={<AdminDashboard />} />
+          <Route path="/edit-profile" element={<EditProfile />} />
         </Routes>
 
         <Footer />

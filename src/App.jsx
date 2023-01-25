@@ -16,3 +16,7 @@ function App() {
 }
 
 export default App;
+
+
+// "start": "react-scripts  --openssl-legacy-provider start",
+    // "build": "react-scripts build",

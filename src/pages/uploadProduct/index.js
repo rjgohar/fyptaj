@@ -117,7 +117,7 @@ const UploadFile = () => {
             <FormControl>
               <InputField
                 placeholder=" Write Description "
-                rows={6}
+                rows={8}
                 multiline
                 className={classes.forArea}
                 onChange={formik.handleChange}
@@ -135,15 +135,15 @@ const UploadFile = () => {
           <Box className={classes.btns}>
             <Box>
               <Button
-                type="submit"
                 variant="contained"
+                type="submit"
                 className={classes.connectButton}
               >
                 Save Data
               </Button>
             </Box>
             <Box>
-              <Button variant="outlined" className={classes.connectButton}>
+              <Button variant="contained" className={classes.connectButton}>
                 discard
               </Button>
             </Box>
@@ -166,8 +166,14 @@ const useStyle = makeStyles((theme) => ({
 
   connectButton: {
     color: "black",
-    backgroundColor: "transparent",
-    borderColor: "black",
+    fontSize: "14px",
+    fontWeight: 600,
+    border: "none",
+    height: 60,
+    backgroundColor: "#1BA665",
+    "&:hover": {
+      backgroundColor: "#1BA665",
+    },
   },
   mainMint: {
     margin: 50,
@@ -240,20 +246,14 @@ const useStyle = makeStyles((theme) => ({
     marginLeft: "5px",
     color: "#17D7F5",
   },
-  checbxicn: {
-    color: "#D9D9D9",
-    borderRadius: "7.3722px",
-  },
-  termscondation: {
-    color: "#FFFFFF",
-    fontSize: "16.6414px",
-    textAlign: "Justified",
-    fontFamily: "Poppins",
-  },
+
   forArea: {
     color: "black",
-    borderColor: "black",
+    border: "3px solid #1BA665",
     padding: "10px 10px",
+    "&:hover": {
+      border: "3px solid #1BA665",
+    },
   },
 
   two: {
@@ -269,12 +269,15 @@ const useStyle = makeStyles((theme) => ({
   },
 
   tagInput: {
-    // borderBottom: "2px solid black",
-    // border: "none",
     fontFamily: "Poppins",
     color: "black",
-    borderRadius: 30,
-    padding: "0 10px",
+    border: "3px solid #1BA665",
+    // borderRadius: "15px !important",
+
+    padding: "8px 10px",
+    "&:hover": {
+      border: "3px solid #1BA665 !important",
+    },
   },
   typopara: {
     paddingTop: "35px",

@@ -11,6 +11,7 @@ import clsx from "clsx";
 import ProfileFormer from "../../profileformer";
 import ProductsMap from "../../productCard/productMap";
 import InWalletProducts from "../../inWalletProducts/productMap";
+import EditProfile from "../../editProfile";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -87,7 +88,7 @@ function VerticalTabs() {
         </TabPanel>
         <TabPanel value={value} index={1}>
           <div>
-            <ProductsMap />
+            <EditProfile />
           </div>
         </TabPanel>
         <TabPanel value={value} index={2}>

@@ -5,6 +5,7 @@ export const singleusers = createAsyncThunk(
   "user/singleUser",
   async (payload) => {
     const { data } = await getSingleUserApi(payload);
+
     return data;
   }
 );

@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
   registerSlice,
   Product: productSlicer,
   Users: usersSlicers,
-  singleSlicer: singleuserSlicer,
+  singleuserSlicer: singleuserSlicer,
   inWallet: inWalletSlice,
 });
 export default rootReducer;

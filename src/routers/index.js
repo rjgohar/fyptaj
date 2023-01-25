@@ -39,10 +39,10 @@ const Routers = () => {
               </PrivateRoute>
             }
           />
-          <Route path="/myprofile/:user" element={<Usersdashboard />} />
+          <Route path="/myprofile/:id" element={<Usersdashboard />} />
 
           <Route path="/adimindashboard" element={<AdminDashboard />} />
-          <Route path="/edit-profile" element={<EditProfile />} />
+          <Route path="/editprofile" element={<EditProfile />} />
         </Routes>
 
         <Footer />

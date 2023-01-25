@@ -13,11 +13,12 @@ export default withStyles((theme) => ({
 
     "& .MuiOutlinedInput-root": {
       outline: "none",
-      borderRadius: "27px",
-      border: "0.2px solid " + theme.palette.primary.main,
+
+      border: "1px solid " + theme.palette.primary.main,
     },
     "& .MuiOutlinedInput-input": {
       padding: "15px 20px",
+      border: "1px solid " + theme.palette.primary.main,
       color: theme.palette.primary.main,
     },
     [theme.breakpoints.down("sm")]: {

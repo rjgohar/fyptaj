@@ -5,7 +5,7 @@ const initialState = {
   singleuserLoading: false,
   singleuserLoadingFailed: false,
   singleuserLoadingSuccess: false,
-  singleuser: [],
+  singleuser: { userInfo: {} },
 };
 
 const singleSlicer = createSlice({

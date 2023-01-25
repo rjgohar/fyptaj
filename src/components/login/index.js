@@ -163,4 +163,8 @@ const useStyles = makeStyles((theme) => ({
   helpertext: {
     fontSize: 12,
   },
+
+  btn: {
+    width: 100,
+  },
 }));

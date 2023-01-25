@@ -10,11 +10,14 @@ import {
 import React from "react";
 import { useState } from "react";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { resetRegisteringUser } from "../../redux/register/register.slicer";
 import { Link } from "react-router-dom";
 const UserButton = () => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const {
+    login: { userId },
+  } = useSelector((state) => state.registerSlice);
   const classes = useStyles();
   const dispatch = useDispatch();
   const handleClick = (event) => {
@@ -59,8 +62,8 @@ const UserButton = () => {
         }}
       >
         <div>
-          <Link to="/myaccountformer">
-            <MenuItem className={classes.menu}>My Account</MenuItem>
+          <Link to={`/myprofile/${userId}`}>
+            <MenuItem className={classes.menu}>Profile</MenuItem>
           </Link>
 
           <MenuItem className={classes.menu} onClick={handleLogout}>

@@ -12,11 +12,11 @@ import Signup from "../pages/signup";
 import ProductDetail from "../pages/productDetails";
 import UploadFile from "../pages/uploadProduct";
 import PrivateRoute from "./protectedRoute";
-import Fomerdashboard from "../pages/fomeraccountpage";
-import UserDashboard from "../pages/userdashboard";
+
 import AdminDashboard from "../components/adminDashboard";
 import AboutUs from "../pages/aboutus";
 import UniversalHooks from "../components/UniversalHooks";
+import Usersdashboard from "../pages/profilepage";
 const Routers = () => {
   return (
     <UniversalHooks>
@@ -38,8 +38,8 @@ const Routers = () => {
               </PrivateRoute>
             }
           />
-          <Route path="/myaccountformer" element={<Fomerdashboard />} />
-          <Route path="/myaccountuser" element={<UserDashboard />} />
+          <Route path="/myprofile/:user" element={<Usersdashboard />} />
+
           <Route path="/adimindashboard" element={<AdminDashboard />} />
         </Routes>
 

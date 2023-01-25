@@ -7,12 +7,10 @@ import Typography from "@material-ui/core/Typography";
 
 import Box from "@material-ui/core/Box";
 
-import { Link } from "react-router-dom";
 import clsx from "clsx";
 import ProfileFormer from "../../profileformer";
 import ProductsMap from "../../productCard/productMap";
-import OrderHistory from "../../orderhistory";
-import EarningFormer from "../../earningformer";
+import InWalletProducts from "../../inWalletProducts/productMap";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -71,21 +69,14 @@ function VerticalTabs() {
               [classes.forTabs]: true,
               [classes.selected]: value === 1,
             })}
-            label="Uploaded products"
+            label="edit profile"
           />
           <Tab
-            label="orders History"
-            className={clsx({
+            class={clsx({
               [classes.forTabs]: true,
               [classes.selected]: value === 2,
             })}
-          />
-          <Tab
-            label="earning"
-            className={clsx({
-              [classes.forTabs]: true,
-              [classes.selected]: value === 3,
-            })}
+            label="Created Products"
           />
         </Tabs>
       </Box>
@@ -99,15 +90,8 @@ function VerticalTabs() {
             <ProductsMap />
           </div>
         </TabPanel>
-        <TabPanel value={value} index={2} className={classes.panelContainer}>
-          <div>
-            <OrderHistory />
-          </div>
-        </TabPanel>
-        <TabPanel value={value} index={3} className={classes.panelContainer}>
-          <div>
-            <EarningFormer />
-          </div>
+        <TabPanel value={value} index={2}>
+          <InWalletProducts />
         </TabPanel>
       </Box>
     </div>

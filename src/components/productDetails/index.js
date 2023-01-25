@@ -7,30 +7,43 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSingleProduct } from "../../redux/product/product.actions";
 import BidPopup from "../bidPopup";
 import Buttons from "../buttons";
+import Timer from "../Timer";
+import { resetStateinWallet } from "../../redux/userInWallet/Inwalletslicer";
+import { baseURL } from "../../Http/config";
 export default function ProductDetails() {
   const classes = useStyles();
   const { id } = useParams();
   const [open, setOpen] = useState(false);
+  const [isAuctionEnded, setIsAuctionEnded] = useState(false);
   const dispatch = useDispatch();
   const {
     singleProductData: {
       productTitle,
       productDescription,
       rate,
-      quantity,
+      reserveQuantity,
       username,
       status,
       userId,
       productId,
       image,
+      highestBid,
+      reservePrice,
+      auctionId,
+      endTime,
     },
   } = useSelector((state) => state.Product);
-  const handleModalClose = () => setOpen(false);
+  const { isaddingBidSucces } = useSelector((state) => state.inWallet);
+  const handleModalClose = () => {
+    dispatch(resetStateinWallet());
+    setOpen(false);
+  };
+  console.log(reserveQuantity, "quam");
   const handleModalOpen = () => setOpen(true);
   useEffect(() => {
     dispatch(getSingleProduct(id));
-  }, [dispatch, id]);
-  console.log(userId, productId);
+  }, [dispatch, id, isaddingBidSucces]);
+
   return (
     <div className={classes.productDetails}>
       <BidPopup
@@ -38,14 +51,18 @@ export default function ProductDetails() {
         productId={productId}
         open={open}
         price={rate}
-        quantity={quantity}
+        quantity={reserveQuantity}
         handleClose={handleModalClose}
+        reservePrice={reservePrice}
+        auctionId={auctionId}
+        endTime={endTime}
+        highestBid={highestBid}
       />
 
       <Box>
         <img
           className={classes.productimage}
-          src={`http://localhost:8000/static/${image}`}
+          src={`${baseURL}assets/products/${image}`}
           alt="iane"
         />
       </Box>
@@ -70,7 +87,7 @@ export default function ProductDetails() {
             <Typography className="typo" variant="body1">
               price:
             </Typography>
-            <Typography variant="h4">Rs.&nbsp;{rate}</Typography>
+            <Typography variant="h4">Rs.&nbsp;{reservePrice}</Typography>
           </div>
           <div className="inner">
             {" "}
@@ -86,13 +103,35 @@ export default function ProductDetails() {
             <Typography className="typo" variant="body1">
               Quantity:
             </Typography>
-            <Typography variant="body1">{quantity}&nbsp;KG</Typography>
+            <Typography variant="body1">{reserveQuantity}&nbsp;KG</Typography>
           </div>
-          <Box display={"flex"} justifyContent="center">
-            <Buttons onClick={handleModalOpen} variant="contained">
-              Place Bid
-            </Buttons>
-          </Box>
+          <div className="inner">
+            {" "}
+            <Typography className="typo" variant="body1">
+              Highest Bid:{" "}
+            </Typography>
+            <Typography variant="body1">
+              {" "}
+              {Boolean(!highestBid) ? "there is no bid yet" : highestBid}
+            </Typography>
+          </div>
+
+          <div>
+            {endTime && (
+              <Timer
+                end={endTime}
+                setIsAuctionEnded={setIsAuctionEnded}
+                isAuctionEnded={isAuctionEnded}
+              />
+            )}
+          </div>
+          {!isAuctionEnded && (
+            <Box display={"flex"} justifyContent="center">
+              <Buttons onClick={handleModalOpen} variant="contained">
+                Place Bid
+              </Buttons>
+            </Box>
+          )}
         </Box>
       </Box>
     </div>

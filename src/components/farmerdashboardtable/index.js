@@ -1,34 +1,43 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { TableCell, TableRow } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import pic from "../../assets/pic.png";
 
 import BasicTable from "../table";
 import Buttons from "../buttons";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllUsers } from "../../redux/users/users.actions";
 const columns = ["id", " Name", "image", " bio", "Action"];
 
-const clients = ["1", "ronny ", { type: "img", src: pic }, "sada haq"];
-const rows = [clients, clients, clients];
-
 const FarmeraDashboardTable = () => {
+  const dispatch = useDispatch();
+  const { farmers, users } = useSelector((state) => state.Users);
   const classes = useStyles();
+
+  // Api Call
+  useEffect(() => {
+    dispatch(getAllUsers());
+
+    console.log(farmers, "farmers");
+  }, [dispatch]);
+
   const head = columns.map((col, id) => (
     <TableCell key={id} className={classes.col}>
       {col}
     </TableCell>
   ));
 
-  const body = rows.map((row, id) => (
+  const body = farmers.map(({ userId, username, image, description }, id) => (
     <TableRow key={id}>
-      {row.map((col) =>
-        col.type ? (
-          <TableCell className={classes.col}>
-            <img src={`${col.src}`} className={classes.image} />
-          </TableCell>
-        ) : (
-          <TableCell className={classes.col}>{col}</TableCell>
-        )
-      )}
+      <TableCell className={classes.col}>{userId}</TableCell>
+      <TableCell className={classes.col}>{username}</TableCell>
+      <TableCell className={classes.col}>
+        <img
+          src={`http://localhost:8000/static/${image}`}
+          className={classes.image}
+        />
+      </TableCell>
+      <TableCell className={classes.col}>{description}</TableCell>
       <TableCell>
         <Buttons className={classes.btnview} variant="outlined">
           view{" "}

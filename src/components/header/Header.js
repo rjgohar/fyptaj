@@ -16,7 +16,7 @@ const Header = () => {
   const classes = useStyles();
   const navigate = useNavigate();
   const {
-    login: { username },
+    login: { username, userId },
     loginLoadingSucess,
   } = useSelector((state) => state.registerSlice);
   function handleRoute(path) {
@@ -25,11 +25,7 @@ const Header = () => {
   return (
     <div className="App">
       <div className={classes.root}>
-        <AppBar
-          className={classes.AppBar}
-          position="fixed"
-          style={{ backgroundColor: "red" }}
-        >
+        <AppBar className={classes.AppBar} position="fixed">
           <Toolbar className={classes.Toolbar}>
             <div className={classes.logoDiv}>
               <div className={classes.logoName}>

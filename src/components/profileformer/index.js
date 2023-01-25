@@ -110,11 +110,7 @@ const ProfileFormer = (props) => {
             <Divider className={classes.cardDivider} variant="middle" />
           </CardContent>
 
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <Buttons className={classes.btnedit} variant="contained">
-              edit profile
-            </Buttons>
-          </div>
+          <div style={{ display: "flex", justifyContent: "center" }}></div>
         </CardActionArea>
       </MuiCard>
     </>

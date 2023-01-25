@@ -37,9 +37,7 @@ export default function BasicTable({
         </TableHead>
         <TableBody className={classes.textcol}>{body}</TableBody>
       </Table>
-      <Box>
-        <PaginationRounded />
-      </Box>
+      <Box>{/* <PaginationRounded /> */}</Box>
     </TableContainer>
   );
 }

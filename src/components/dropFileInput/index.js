@@ -15,13 +15,13 @@ function ImageUpload({ formik, value, helperText, error }) {
         <div className={classes.widthNft}>
           <PublishIcon className={classes.icon} />
 
-          <Typography variant="h5">Click here to upload</Typography>
+          <Typography variant="h5">Click here to upload product</Typography>
         </div>
         {value && (
           <div className={classes.image}>
             <img
               src={value && URL.createObjectURL(value)}
-              alt="nft"
+              alt="product image"
               style={{ width: "100%", height: "100%" }}
             />
           </div>
@@ -50,16 +50,16 @@ export default ImageUpload;
 
 const useStyles = makeStyles((theme) => ({
   upload: {
-    border: `solid 2px ${theme.palette.secondary.main}`,
-    borderRadius: "20px",
+    border: "2px solid #1BA665",
+
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     cursor: "pointer",
     flexDirection: "column",
-    height: "100%",
+    height: "400px",
     overflow: "hidden",
-    width: "100%",
+    width: "400px",
   },
   icon: {
     color: theme.palette.text.secondary,
@@ -76,8 +76,8 @@ const useStyles = makeStyles((theme) => ({
   },
 
   image: {
-    minWidth: "100%",
-    minHeight: "100%",
+    width: "100%",
+    height: "100%",
     zIndex: 100,
     "&:hover": {
       zIndex: -1,

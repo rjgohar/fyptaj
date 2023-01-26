@@ -45,55 +45,73 @@ const ProfileFormer = (props) => {
             />
           </CardContent>
           <CardContent className={classes.cardTitleContainer}>
-            <Box className={classes.cardadata}>
-              <Typography
-                gutterBottom
-                variant="h3"
-                className={classes.avatarLink}
-              >
-                name:
-              </Typography>{" "}
-              <Typography
-                gutterBottom
-                variant="h4"
-                className={classes.avatarLink}
-              >
-                {userInfo.username}
-              </Typography>
-            </Box>
-            <Box className={classes.cardadata}>
-              <Typography
-                gutterBottom
-                variant="h3"
-                className={classes.avatarLink}
-              >
-                email:
-              </Typography>{" "}
-              <Typography
-                gutterBottom
-                variant="h4"
-                className={classes.avatarLink}
-              >
-                {userInfo.email}
-              </Typography>
-            </Box>
+            <div className={classes.dataaSecc}>
+              <Box className={classes.cardadata}>
+                <Typography
+                  gutterBottom
+                  variant="h3"
+                  className={classes.avatarLink}
+                >
+                  name:
+                </Typography>{" "}
+                <Typography
+                  gutterBottom
+                  variant="h4"
+                  className={classes.avatarLink}
+                >
+                  {userInfo.username}
+                </Typography>
+              </Box>
+              <Box className={classes.cardadata}>
+                <Typography
+                  gutterBottom
+                  variant="h3"
+                  className={classes.avatarLink}
+                >
+                  email:
+                </Typography>{" "}
+                <Typography
+                  gutterBottom
+                  variant="h4"
+                  className={classes.avatarLink}
+                >
+                  {userInfo.email}
+                </Typography>
+              </Box>
 
-            <Box className={classes.cardadata}>
-              <Typography
-                gutterBottom
-                variant="h3"
-                className={classes.avatarLink}
-              >
-                Cnic:
-              </Typography>{" "}
-              <Typography
-                gutterBottom
-                variant="h4"
-                className={classes.avatarLink}
-              >
-                {userInfo.cnic}
-              </Typography>
-            </Box>
+              <Box className={classes.cardadata}>
+                <Typography
+                  gutterBottom
+                  variant="h3"
+                  className={classes.avatarLink}
+                >
+                  Cnic:
+                </Typography>{" "}
+                <Typography
+                  gutterBottom
+                  variant="h4"
+                  className={classes.avatarLink}
+                >
+                  {userInfo.cnic}
+                </Typography>
+              </Box>
+              <Box className={classes.cardadata}>
+                <Typography
+                  gutterBottom
+                  variant="h3"
+                  className={classes.avatarLink}
+                >
+                  location:
+                </Typography>{" "}
+                <Typography
+                  gutterBottom
+                  variant="h4"
+                  className={classes.avatarLink}
+                >
+                  {userInfo.location}
+                </Typography>
+              </Box>
+            </div>
             <Divider className={classes.cardDivider} variant="middle" />
             <Box mt={1}>
               <Typography
@@ -193,5 +211,16 @@ const useStyles = makeStyles((theme) => ({
   },
   primaryBtn: {
     textTransform: "initial",
+  },
+
+  dataaSecc: {
+    display: "grid",
+    gap: 20,
+    gridTemplateColumns: "1fr 1fr",
+    [theme.breakpoints.down("sm")]: {
+      gridTemplateColumns: "1fr",
+      justifyContent: "center",
+      alignItems: "center",
+    },
   },
 }));

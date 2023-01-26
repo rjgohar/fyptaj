@@ -140,11 +140,12 @@ const useStyles = makeStyles((theme) => ({
   productDetails: {
     border: "2px solid" + theme.palette.background.border,
     marginTop: 160,
-    width: "80%",
+    width: "90%",
     margin: "0 auto",
     marginBottom: 60,
     color: theme.palette.text.secondary,
     display: "grid",
+    gap: 30,
     gridTemplateColumns: "1fr 1fr 1fr",
     justifyContent: "space-around",
     [theme.breakpoints.down("sm")]: {
@@ -169,8 +170,9 @@ const useStyles = makeStyles((theme) => ({
   },
 
   productimage: {
-    width: 400,
-    height: 500,
+    padding: 8,
+    width: 450,
+    height: 450,
     [theme.breakpoints.down("sm")]: {
       display: "block",
       margin: "auto",

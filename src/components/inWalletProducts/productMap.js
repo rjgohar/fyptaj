@@ -10,14 +10,14 @@ import CardProduct from "../productCard";
 export default function InWalletProducts() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { user } = useParams();
+  const { id } = useParams();
 
   const {
     inWallet: { createdProducts },
     isOnAuctiontAdded,
   } = useSelector((state) => state.inWallet);
   useEffect(() => {
-    dispatch(getInWallet(user));
+    dispatch(getInWallet(id));
   }, [dispatch, isOnAuctiontAdded]);
   return (
     <Box className={classes.main}>

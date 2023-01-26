@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import image from "../../assets/pic.png";
+// import image from "../../assets/pic.png";
 import {
   Box,
   Card as MuiCard,
@@ -18,6 +18,7 @@ import { useParams } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { singleusers } from "../../redux/users/singleuser/singleuser.action";
+import { baseURL } from "../../Http/config";
 const ProfileFormer = (props) => {
   const classes = useStyles();
   const { id } = useParams();
@@ -36,7 +37,12 @@ const ProfileFormer = (props) => {
       <MuiCard className={classes.root}>
         <CardActionArea>
           <CardContent className={classes.media}>
-            <img src={image} alt="" style={{}} className={classes.image} />
+            <img
+              src={`${baseURL}/assets/profilePicture/${userInfo.image}`}
+              alt=""
+              style={{}}
+              className={classes.image}
+            />
           </CardContent>
           <CardContent className={classes.cardTitleContainer}>
             <Box className={classes.cardadata}>

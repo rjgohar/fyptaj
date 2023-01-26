@@ -1,8 +1,41 @@
 import { Box, makeStyles, Typography } from "@material-ui/core";
-import React from "react";
+import React, { useRef, useState } from "react";
 import ImageIcon from "@material-ui/icons/Image";
 import img from "../../assets/pic.png";
+import { useDispatch, useSelector } from "react-redux";
+import { updateProfilePic } from "../../redux/users/updatedata/userdataupdat.action";
+import { baseURL } from "../../Http/config";
 const EditProfile = () => {
+  const imageRef = useRef();
+
+  const {
+    singleuser: { userInfo },
+  } = useSelector((state) => state.singleuserSlicer);
+  console.log(userInfo, "infp");
+  const [image, setProfileImage] = useState();
+  const dispatch = useDispatch();
+  const uploadProfilePic = (e) => {
+    console.log(e.target.files[0]);
+    setProfileImage(e.target.files[0]);
+    const fd = new FormData();
+    fd.append("file", e.target.files[0]);
+
+    fd.append("userId", userInfo.userId);
+    console.log(userInfo.userId, "info id");
+
+    dispatch(updateProfilePic(fd));
+  };
+
+  // const dataUpate = () => {
+  //   const fd = new FormData();
+  //   fd.append("description", description);
+  //   fd.append("cnic", cnic);
+  //   fd.append("location", location);
+  //   fd.append("email", email);
+  //   fd.append("userId", userId);
+
+  //   dispatch(updateUserprofile(fd));
+  // };
   const classes = useStyles();
   return (
     <Box className={classes.main}>
@@ -12,13 +45,21 @@ const EditProfile = () => {
         </Typography>
         <div style={{ height: 300 }}></div>
         <div className={classes.imgBox}>
-          <img className="image" src={img} alt="profile" />
+          <img
+            className="image"
+            src={
+              !image
+                ? `${baseURL}assets/profilePicture/${userInfo.image}`
+                : URL.createObjectURL(image)
+            }
+            alt="profile"
+          />
           <div className={classes.uploadProfile}>
             <label className={classes.imgLable}>
               <ImageIcon className={classes.icon} />
               <input
-                // ref={imageRef}
-                // onChange={profileImageUpload}
+                ref={imageRef}
+                onChange={uploadProfilePic}
                 type="file"
                 className={classes.imgInput}
               />
@@ -52,7 +93,11 @@ const EditProfile = () => {
           />
         </Box>
         <Box className={classes.endsection}>
-          <button type="submit" className={classes.submitBtn}>
+          <button
+            type="submit"
+            // onClick={() => dataUpate()}
+            className={classes.submitBtn}
+          >
             Update Now
           </button>
         </Box>
@@ -166,16 +211,19 @@ const useStyles = makeStyles((theme) => ({
     height: 250,
     borderRadius: "50%",
     position: "absolute",
-    bottom: 190,
+    bottom: -40,
     left: "50%",
     transform: "translate(-50%, -50%)",
     display: "flex",
     flexDirection: "column",
-    border: "2px solid #FFFFFF",
+    border: "2px solid #1BA665",
     [theme.breakpoints.down("md")]: {
-      top: 330,
+      bottom: 189,
     },
-    [theme.breakpoints.down("sm")]: {},
+    [theme.breakpoints.down("xs")]: {
+      bottom: -40,
+      marginBottom: 20,
+    },
 
     "& .image": {
       width: 250,

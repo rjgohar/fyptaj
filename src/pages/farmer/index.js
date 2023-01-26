@@ -5,7 +5,7 @@ import MapCardFarmer from "../../components/farmerSection";
 
 export default function Farmer() {
   return (
-    <div style={{ paddingTop: "90px" }}>
+    <div style={{ paddingTop: "30px" }}>
       <Topsellers />
       <MapCardFarmer />
     </div>

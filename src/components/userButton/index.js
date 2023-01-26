@@ -11,15 +11,17 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import { useState } from "react";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import Avatar from "@material-ui/core/Avatar";
 import { useDispatch, useSelector } from "react-redux";
 import { resetRegisteringUser } from "../../redux/register/register.slicer";
 import { Link } from "react-router-dom";
+import { baseURL } from "../../Http/config";
 const UserButton = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const {
-    login: { userId, username },
+    login: { userId, username, image },
   } = useSelector((state) => state.registerSlice);
+  console.log(image, "hshsshshhss");
   const classes = useStyles();
   const dispatch = useDispatch();
   const handleClick = (event) => {
@@ -40,7 +42,10 @@ const UserButton = () => {
   return (
     <div className={classes.root}>
       <Box className={classes.avatarBtn} onClick={handleClick}>
-        <AccountCircleIcon />
+        <Avatar
+          alt="Remy Sharp"
+          src={`${baseURL}assets/profilePicture/${image}`}
+        />
         <Typography variant="h4" align="center" className={classes.typo}>
           {username}
         </Typography>

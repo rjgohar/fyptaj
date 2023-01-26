@@ -14,7 +14,7 @@ const TopSellerCard = ({ image, username, userId }) => {
         <img
           alt="image"
           className={classes.imageOne}
-          src={`${baseURL}assets/profile/${image}`}
+          src={`${baseURL}assets/profilePicture/${image}`}
         />
         <Box className={classes.topSellerProfile}>
           <Typography variant="h5">@ {username}</Typography>

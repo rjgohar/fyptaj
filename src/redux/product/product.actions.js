@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   addBidApi,
   addProductApi,
+  deleteProductsApi,
   getAllProductsApi,
   getSingleProductApi,
 } from "../../Http/api";
@@ -31,3 +32,10 @@ export const addBid = createAsyncThunk("product/addBid", async (payload) => {
   const { data } = await addBidApi(payload);
   return data;
 });
+export const deleteProduct = createAsyncThunk(
+  "product/deleteProduct",
+  async (payload) => {
+    const { data } = await deleteProductsApi(payload);
+    return data;
+  }
+);

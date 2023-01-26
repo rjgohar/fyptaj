@@ -1,4 +1,4 @@
-import { Box, Typography } from "@material-ui/core";
+import { Avatar, Box, Typography } from "@material-ui/core";
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Link } from "react-router-dom";
@@ -11,11 +11,25 @@ const TopSellerCard = ({ image, username, userId }) => {
   return (
     <Box className={classes.container}>
       <Link to={`/profile/${userId}`} className={classes.profileLink}>
-        <img
-          alt="image"
-          className={classes.imageOne}
-          src={`${baseURL}assets/profilePicture/${image}`}
-        />
+        {image ? (
+          <img
+            alt="image"
+            className={classes.imageOne}
+            src={`${baseURL}assets/profilePicture/${image}`}
+          />
+        ) : (
+          <>
+            {" "}
+            <Avatar
+              alt="Remy Sharp"
+              src={"/broken-image.jpg"}
+              className={classes.imageOne}
+            >
+              {username.slice(0, 1)}
+            </Avatar>
+          </>
+        )}
+
         <Box className={classes.topSellerProfile}>
           <Typography variant="h5">@ {username}</Typography>
         </Box>

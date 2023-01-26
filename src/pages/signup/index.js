@@ -7,11 +7,6 @@ function Signup() {
   const classes = useStyles();
   return (
     <Box className={classes.mainContainer}>
-      <Box pt={5} pb={2}>
-        <Typography className={classes.titleHead} variant="h4">
-          Welcome!
-        </Typography>
-      </Box>
       <Box>
         <SignupSection />
       </Box>
@@ -22,8 +17,8 @@ function Signup() {
 export default Signup;
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
-    paddingTop: 80,
-    height: "90vh",
+    marginTop: 100,
+    // height: "90vh",
     background: theme.palette.background.footer,
     display: "flex",
     flexDirection: "column",

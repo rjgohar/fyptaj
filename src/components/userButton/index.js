@@ -1,4 +1,14 @@
-import { IconButton, makeStyles, Menu, MenuItem } from "@material-ui/core";
+import {
+  Box,
+  Fade,
+  IconButton,
+  makeStyles,
+  Menu,
+  MenuItem,
+  Paper,
+  Popper,
+  Typography,
+} from "@material-ui/core";
 import React from "react";
 import { useState } from "react";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
@@ -8,7 +18,7 @@ import { Link } from "react-router-dom";
 const UserButton = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const {
-    login: { userId },
+    login: { userId, username },
   } = useSelector((state) => state.registerSlice);
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -29,13 +39,12 @@ const UserButton = () => {
   };
   return (
     <div className={classes.root}>
-      <IconButton
-        aria-controls="simple-menu"
-        aria-haspopup="true"
-        onClick={handleClick}
-      >
+      <Box className={classes.avatarBtn} onClick={handleClick}>
         <AccountCircleIcon />
-      </IconButton>
+        <Typography variant="h4" align="center" className={classes.typo}>
+          {username}
+        </Typography>
+      </Box>
 
       <Menu
         className={classes.maincont}
@@ -84,5 +93,13 @@ const useStyles = makeStyles((theme) => ({
     "& .MuiSvgIcon-root": {
       fontSize: 40,
     },
+  },
+  avatarBtn: {
+    display: "flex",
+    alignItems: "center",
+    cursor: "pointer",
+  },
+  typo: {
+    color: theme.palette.text.primary,
   },
 }));

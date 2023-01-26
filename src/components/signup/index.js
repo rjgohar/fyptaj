@@ -17,6 +17,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { registerUser } from "../../redux/register/register.actions";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { Alert } from "@material-ui/lab";
 
 export default function SignupSection() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -34,6 +35,7 @@ export default function SignupSection() {
     isUserRegistering,
     userResisgteringStatus,
     isUserRegisteringSuccess,
+    isUserRegisteringFailed,
   } = useSelector((state) => state.registerSlice);
   const naviagte = useNavigate();
 
@@ -41,7 +43,7 @@ export default function SignupSection() {
     let timer;
     if (isUserRegisteringSuccess) {
       timer = setTimeout(() => {
-        naviagte("/");
+        naviagte("/signin");
       }, 2000);
     }
     return () => clearTimeout(timer);
@@ -75,17 +77,30 @@ export default function SignupSection() {
 
   return (
     <Box className={classes.mainContainer}>
-      <Box pt={8} pb={1}>
-        <Typography className={classes.typo} variant="body1">
+      {isUserRegisteringSuccess && (
+        <Alert severity="success" style={{ fontSize: 16 }}>
+          Registered SuccessFully
+        </Alert>
+      )}
+
+      {isUserRegisteringFailed && (
+        <Alert severity="error" style={{ fontSize: 16 }}>
+          Something went really wrong
+        </Alert>
+      )}
+
+      <br />
+      <Box>
+        <Typography className={classes.typoSignUp} variant="h2">
           {" "}
-          hello! let's get started
+          Hello! let's get started
         </Typography>
       </Box>
       <form onSubmit={formik.handleSubmit}>
-        <Box pt={8} pb={2}>
+        <Box pt={2} pb={2}>
           <Typography className={classes.typo} variant="body1">
             {" "}
-            userName
+            User Name
           </Typography>
           <TextField
             name="userName"
@@ -101,7 +116,7 @@ export default function SignupSection() {
         <Box pb={3}>
           <Typography className={classes.typo} variant="body1">
             {" "}
-            Email Address / NIC
+            Email Address
           </Typography>
           <TextField
             variant="outlined"
@@ -123,6 +138,7 @@ export default function SignupSection() {
             variant="outlined"
             placeholder="Password"
             name="passowrd"
+            type="password"
             value={formik.values.passowrd}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -161,7 +177,11 @@ export default function SignupSection() {
             type="submit"
           >
             {" "}
-            Sign Up
+            {isUserRegistering && !isUserRegisteringSuccess ? (
+              <CircularProgress />
+            ) : (
+              "Sign Up"
+            )}
           </Buttons>
         </Box>
       </form>
@@ -170,9 +190,10 @@ export default function SignupSection() {
 }
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
-    width: 700,
-    height: 650,
+    width: 600,
+    height: 565,
     marginBottom: 80,
+    marginTop: 30,
     borderRadius: "8px",
     background: theme.palette.background.alpha,
     display: "flex",
@@ -196,7 +217,12 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 5,
   },
   typo: {
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.primary,
+    textTransform: "capitalize",
+  },
+  typoSignUp: {
+    color: theme.palette.text.primary,
+    fontWeight: 800,
     textTransform: "capitalize",
   },
   ButtonSignin: {

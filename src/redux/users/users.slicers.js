@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllUsers } from "./users.actions";
+import { getAllUsers, deleteuser } from "./users.actions";
 
 const initialState = {
   usersLoading: false,
@@ -7,6 +7,10 @@ const initialState = {
   usersLoadingSuccess: false,
   users: [],
   farmers: [],
+  ////////////////////////////////
+  isuserDeleteLoading: false,
+  isuserDeleted: false,
+  isuserDeleteFailed: false,
 };
 
 const UsersSlicer = createSlice({
@@ -50,6 +54,19 @@ const UsersSlicer = createSlice({
       state.usersLoading = false;
       state.usersLoadingFailed = true;
       state.usersLoadingSuccess = false;
+    },
+
+    ////////////////////////////////
+    [deleteuser.pending]: (state, action) => {
+      state.isuserDeleteLoading = true;
+    },
+    [deleteuser.fulfilled]: (state, action) => {
+      state.isuserDeleteLoading = false;
+      state.isuserDeleted = true;
+    },
+    [deleteuser.rejected]: (state, action) => {
+      state.isuserDeleteLoading = false;
+      state.isuserDeleteFailed = true;
     },
   },
 });

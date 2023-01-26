@@ -2,7 +2,6 @@ import React from "react";
 import { makeStyles, Typography } from "@material-ui/core";
 import v1 from "../../assets/video.mp4";
 import v2 from "../../assets/video1.mp4";
-import { Height } from "@material-ui/icons";
 
 const AboutUs = () => {
   const classes = useStyles();

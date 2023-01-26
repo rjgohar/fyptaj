@@ -1,11 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
+  root: {},
   AppBar: {
     width: "100%",
     background: theme.palette.background.main,
@@ -23,10 +18,10 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: "3px",
     },
   },
-  logoName: {},
+
   logo: {
-    width: "85px",
-    height: "80px",
+    width: "130px",
+    height: "30px",
     borderRadius: "40px",
     [theme.breakpoints.down("sm")]: {
       width: "55px",
@@ -43,23 +38,7 @@ const useStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
-  logoTextMainH: {
-    display: "flex",
-    fontSize: "25px",
-    fontWeight: "400",
-    [theme.breakpoints.down("sm")]: {
-      display: "flex",
-      fontSize: "20px",
-      flexWrap: "wrap",
-    },
-  },
-  logoTextMainP: {
-    display: "flex",
-    fontSize: "25px",
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "12px",
-    },
-  },
+
   iconCard: {
     color: theme.palette.text.primary,
     width: 42,
@@ -86,11 +65,8 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
+
   title: {
-    flexGrow: 1,
     [theme.breakpoints.down("sm")]: {
       display: "none",
     },
@@ -99,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-around",
     alignItems: "center",
-    height: "12vh",
+    height: "10vh",
     background: theme.palette.background.main,
     [theme.breakpoints.down("sm")]: {
       justifyContent: "space-between",
@@ -111,13 +87,6 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("md")]: {
       display: "none",
     },
-  },
-  HeaderData: {},
-  LogoData: {},
-
-  logo: {
-    width: 200,
-    height: 60,
   },
 }));
 export default useStyles;

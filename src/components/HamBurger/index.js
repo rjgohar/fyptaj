@@ -5,7 +5,7 @@ import { SwipeableDrawer } from "@material-ui/core";
 
 import { List } from "@material-ui/core";
 import { ListItem } from "@material-ui/core";
-import { Divider } from "@material-ui/core";
+
 import { IconButton } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import KeyboardArrowLeftIcon from "@material-ui/icons/KeyboardArrowLeft";

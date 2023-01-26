@@ -25,9 +25,9 @@ export const LoginUser = createAsyncThunk(
   "loginUser/login",
   async (payload, { dispatch }) => {
     try {
-      const { data } = await requestLoginUser(payload);
+      const res = await requestLoginUser(payload);
 
-      return data;
+      return res;
     } catch (error) {
       throw error;
     }

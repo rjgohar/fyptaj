@@ -1,6 +1,6 @@
 import { Box, FormHelperText, makeStyles, Typography } from "@material-ui/core";
 import TextField from "../input";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Alert } from "@material-ui/lab";
 
 import Buttons from "../buttons";
@@ -8,12 +8,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { Form, Formik } from "formik";
 import { loginSchema } from "./schema";
 import { useDispatch, useSelector } from "react-redux";
-import { LoginUser } from "../../redux/register/register.actions";
+import {
+  LoginUser,
+  resetRegisteringUser,
+} from "../../redux/register/register.actions";
 
 export default function LoginSection() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const { error, loginLoadingSucess, loginLoadingFailed } = useSelector(
     (state) => state.registerSlice
   );
@@ -23,6 +27,14 @@ export default function LoginSection() {
       navigate("/");
     }
   }, [loginLoadingSucess]);
+
+  useEffect(() => {
+    if (error && loginLoadingFailed) {
+      setTimeout(() => {
+        dispatch(resetRegisteringUser());
+      }, 1000);
+    }
+  }, [error, loginLoadingFailed]);
   return (
     <Box mb={10} className={classes.mainContainer}>
       <Box pt={6} pb={3}>
@@ -59,9 +71,9 @@ export default function LoginSection() {
               </Alert>
             )}
 
-            {loginLoadingFailed && (
+            {error && loginLoadingFailed && (
               <Alert severity="error" style={{ fontSize: 16 }}>
-                Invalid Email or Password
+                {error}
               </Alert>
             )}
 

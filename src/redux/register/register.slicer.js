@@ -11,13 +11,14 @@ const initialState = {
   loginLoading: false,
   loginLoadingSucess: false,
   loginLoadingFailed: false,
-  error: {},
+  error: "",
+  errorMsg: {},
   isAuthenticated: false,
 };
 
 const handleFulfillement = (state, action) => {
-  console.log(action.payload.token);
-  localStorage.setItem("JWTtoken", action.payload.token);
+  console.log(action.token);
+  localStorage.setItem("JWTtoken", action.token);
 };
 
 const registerSlice = createSlice({
@@ -43,16 +44,18 @@ const registerSlice = createSlice({
       state.error = "";
     },
     [LoginUser.fulfilled]: (state, action) => {
+      const { data } = action.payload;
       state.loginLoading = false;
       state.loginLoadingSucess = true;
-
-      state.login = action.payload.userInfo;
-      handleFulfillement(state, action);
+      state.isAuthenticated = true;
+      state.login = data.userInfo;
+      handleFulfillement(state, data);
+      state.error = "";
     },
-    [LoginUser.rejected]: (state) => {
+    [LoginUser.rejected]: (state, action) => {
       state.loginLoading = false;
       state.loginLoadingFailed = true;
-      state.error = "";
+      state.error = "Invalid Email or Password";
       state.isAuthenticated = false;
     },
     ////////////////////////////////
@@ -63,14 +66,13 @@ const registerSlice = createSlice({
     [checkSession.fulfilled]: (state, action) => {
       state.loginLoading = false;
       state.loginLoadingSucess = true;
-
       state.login = action.payload.userInfo;
-      handleFulfillement(state, action);
+      state.isAuthenticated = true;
     },
     [checkSession.rejected]: (state, action) => {
       state.loginLoading = false;
       state.loginLoadingFailed = true;
-      state.error = action;
+      state.error = "";
       state.isAuthenticated = false;
     },
   },
@@ -81,7 +83,7 @@ const registerSlice = createSlice({
       state.loginLoading = false;
       state.loginLoadingSucess = false;
       state.loginLoadingFailed = false;
-      state.error = {};
+      state.error = "";
       state.isAuthenticated = false;
       localStorage.setItem("JWTtoken", "");
     },

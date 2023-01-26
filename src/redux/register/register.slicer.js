@@ -86,6 +86,7 @@ const registerSlice = createSlice({
       state.error = "";
       state.isAuthenticated = false;
       localStorage.setItem("JWTtoken", "");
+      state.isUserRegisteringSuccess = false;
     },
   },
 });

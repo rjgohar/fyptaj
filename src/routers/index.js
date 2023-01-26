@@ -11,7 +11,7 @@ import Signup from "../pages/signup";
 // import ProductDetails from "../components/productDetails";
 import ProductDetail from "../pages/productDetails";
 import UploadFile from "../pages/uploadProduct";
-import PrivateRoute, { FarmerRoute } from "./protectedRoute";
+import PrivateRoute, { FarmerRoute, UserRoute } from "./protectedRoute";
 
 import AdminDashboard from "../components/adminDashboard";
 import AboutUs from "../pages/aboutus";
@@ -26,7 +26,14 @@ const Routers = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/farmer" element={<Farmer />} />
-          <Route path="/consumer" element={<Consumer />} />
+          <Route
+            path="/consumer"
+            element={
+              <UserRoute>
+                <Consumer />
+              </UserRoute>
+            }
+          />
           <Route path="/signin" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/product/:id" element={<ProductDetail />} />

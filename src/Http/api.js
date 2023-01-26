@@ -200,3 +200,12 @@ export const deleteProductsApi = async (payload) => {
     throw error;
   }
 };
+
+export const deleteuserApi = async (payload) => {
+  try {
+    const res = await MuiBAseUrl.get(`/api/users/deleteUser/${payload}`);
+    return res;
+  } catch (error) {
+    throw error;
+  }
+};

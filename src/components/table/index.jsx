@@ -11,7 +11,6 @@ import {
   Button,
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
-import PaginationRounded from "../Pagination";
 
 export default function BasicTable({
   tableName = null,

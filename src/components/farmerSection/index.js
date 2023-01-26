@@ -28,7 +28,7 @@ export default function MapCardFarmer() {
 
 const useStyles = makeStyles((theme) => ({
   main: {
-    paddingTop: 180,
+    paddingTop: 40,
   },
   gridSection: {
     width: "80%",

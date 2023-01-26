@@ -14,17 +14,15 @@ import FacebookIcon from "@material-ui/icons/Facebook";
 import InstagramIcon from "@material-ui/icons/Instagram";
 
 import { alpha, makeStyles } from "@material-ui/core";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-import Button from "../buttons";
-import Buttons from "../buttons";
 import { useDispatch, useSelector } from "react-redux";
 import { singleusers } from "../../redux/users/singleuser/singleuser.action";
 const ProfileFormer = (props) => {
   const classes = useStyles();
   const { id } = useParams();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   const {
     singleuser: { userInfo },
   } = useSelector((state) => state.singleuserSlicer);

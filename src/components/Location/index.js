@@ -1,4 +1,3 @@
-import { Typography } from "@material-ui/core";
 import useStyles from "./styles";
 import React from "react";
 const Location = () => {

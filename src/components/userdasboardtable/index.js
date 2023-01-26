@@ -1,6 +1,6 @@
 import { TableCell, TableRow } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-import pic from "../../assets/pic.png";
+
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -11,10 +11,8 @@ import {
 import BasicTable from "../table";
 import Buttons from "../buttons";
 import { Link } from "react-router-dom";
+import { baseURL } from "../../Http/config";
 const columns = ["productId", " product Title", "image", " price", "Action"];
-
-const clients = ["1", "ronny ", { type: "img", src: pic }, "sada haq"];
-const rows = [clients, clients, clients];
 
 const ProductDashboardTable = () => {
   const dispatch = useDispatch();
@@ -40,7 +38,8 @@ const ProductDashboardTable = () => {
         <TableCell className={classes.col}>
           {" "}
           <img
-            src={`http://localhost:8000/static/${image}`}
+            src={`${baseURL}assets/products/${image}`}
+            alt="img"
             className={classes.image}
           />{" "}
         </TableCell>
@@ -48,7 +47,7 @@ const ProductDashboardTable = () => {
         <TableCell className={classes.col}>{rate}</TableCell>
 
         <TableCell>
-          <Link to="/product/`${productId}`">
+          <Link to="/product/`${productId}">
             <Buttons className={classes.btnview} variant="outlined">
               view{" "}
             </Buttons>{" "}

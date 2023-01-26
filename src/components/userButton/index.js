@@ -1,12 +1,4 @@
-import {
-  Fade,
-  IconButton,
-  makeStyles,
-  Menu,
-  MenuItem,
-  Paper,
-  Popper,
-} from "@material-ui/core";
+import { IconButton, makeStyles, Menu, MenuItem } from "@material-ui/core";
 import React from "react";
 import { useState } from "react";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";

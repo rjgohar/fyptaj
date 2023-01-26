@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import image from "../../assets/pic.png";
 import {
   Box,
@@ -14,14 +14,25 @@ import FacebookIcon from "@material-ui/icons/Facebook";
 import InstagramIcon from "@material-ui/icons/Instagram";
 
 import { alpha, makeStyles } from "@material-ui/core";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import Button from "../buttons";
 import Buttons from "../buttons";
+import { useDispatch, useSelector } from "react-redux";
+import { singleusers } from "../../redux/users/singleuser/singleuser.action";
 const ProfileFormer = (props) => {
   const classes = useStyles();
+  const { id } = useParams();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const {
+    singleuser: { userInfo },
+  } = useSelector((state) => state.singleuserSlicer);
+  console.log(userInfo, "infp");
 
+  useEffect(() => {
+    dispatch(singleusers(id));
+  }, [dispatch]);
   return (
     <>
       <MuiCard className={classes.root}>
@@ -43,7 +54,7 @@ const ProfileFormer = (props) => {
                 variant="h4"
                 className={classes.avatarLink}
               >
-                rj gohar 295
+                {userInfo.username}
               </Typography>
             </Box>
             <Box className={classes.cardadata}>
@@ -59,7 +70,7 @@ const ProfileFormer = (props) => {
                 variant="h4"
                 className={classes.avatarLink}
               >
-                king295@gmail.com
+                {userInfo.email}
               </Typography>
             </Box>
 
@@ -69,14 +80,14 @@ const ProfileFormer = (props) => {
                 variant="h3"
                 className={classes.avatarLink}
               >
-                number:
+                Cnic:
               </Typography>{" "}
               <Typography
                 gutterBottom
                 variant="h4"
                 className={classes.avatarLink}
               >
-                +923456789
+                {userInfo.cnic}
               </Typography>
             </Box>
             <Divider className={classes.cardDivider} variant="middle" />
@@ -86,11 +97,7 @@ const ProfileFormer = (props) => {
                 component="p"
                 style={{ textAlign: "start", padding: 20 }}
               >
-                As a web developer, you may be responsible for designing and
-                building websites and web applications using languages like
-                HTML, CSS, and JavaScript. You may also be responsible for
-                maintaining and updating existing websites and implementing new
-                features or functionality.
+                {userInfo.description}
               </Typography>
             </Box>
 

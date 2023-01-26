@@ -9,7 +9,7 @@ import Box from "@material-ui/core/Box";
 
 import clsx from "clsx";
 import ProfileFormer from "../../profileformer";
-import ProductsMap from "../../productCard/productMap";
+
 import InWalletProducts from "../../inWalletProducts/productMap";
 import EditProfile from "../../editProfile";
 

@@ -2,21 +2,20 @@ import { Box, Typography } from "@material-ui/core";
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Link } from "react-router-dom";
-import { CREATOR_COVER_PIC_BASE_URL } from "../../http";
+
 import { Skeleton } from "@material-ui/lab";
-const TopSellerCard = ({
-  firstName,
-  lastName,
-  username,
-  cover,
-  walletAddress,
-}) => {
+import { baseURL } from "../../Http/config";
+const TopSellerCard = ({ image, username, userId }) => {
   const classes = useStyle();
 
   return (
     <Box className={classes.container}>
       <Link to={`/profile/${userId}`} className={classes.profileLink}>
-        <img className={classes.imageOne} alt="img" />
+        <img
+          alt="image"
+          className={classes.imageOne}
+          src={`${baseURL}assets/profile/${image}`}
+        />
         <Box className={classes.topSellerProfile}>
           <Typography variant="h5">@ {username}</Typography>
         </Box>
@@ -27,7 +26,7 @@ const TopSellerCard = ({
 
 export default TopSellerCard;
 
-export const ArtistSkeltonCard = () => {
+export const FarmerSkeltonCard = () => {
   const classes = useStyle();
   return (
     <div
@@ -96,7 +95,7 @@ const useStyle = makeStyles((theme) => ({
   },
   profileLink: {
     textDecoration: "none",
-    color: theme.palette.text.primary,
+    color: theme.palette.text.head,
   },
   container: {
     display: "flex",
@@ -104,6 +103,6 @@ const useStyle = makeStyles((theme) => ({
     alignItems: "center",
   },
   title: {
-    color: theme.palette.text.primary,
+    color: theme.palette.text.head,
   },
 }));

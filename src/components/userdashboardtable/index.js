@@ -1,16 +1,19 @@
 import React from "react";
 import { TableCell, TableRow } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-import pic from "../../assets/pic.png";
 
 import BasicTable from "../table";
 import Buttons from "../buttons";
 import { useDispatch, useSelector } from "react-redux";
+import { deleteuser } from "../../redux/users/users.actions";
 const columns = ["id", " Name", "image", " bio", "Action"];
 
 const UserDashboardTable = () => {
   const dispatch = useDispatch();
-  const { farmers, users } = useSelector((state) => state.Users);
+  const { users } = useSelector((state) => state.Users);
+  const handleuserDelete = (userId) => {
+    dispatch(deleteuser(userId));
+  };
 
   const classes = useStyles();
   const head = columns.map((col, id) => (
@@ -26,6 +29,7 @@ const UserDashboardTable = () => {
       <TableCell className={classes.col}>
         <img
           src={`http://localhost:8000/static/${image}`}
+          alt="img"
           className={classes.image}
         />
       </TableCell>
@@ -34,7 +38,14 @@ const UserDashboardTable = () => {
         <Buttons className={classes.btnview} variant="outlined">
           view{" "}
         </Buttons>{" "}
-        <Buttons variant="outlined">delete</Buttons>
+        <Buttons
+          variant="outlined"
+          onClick={() => {
+            handleuserDelete(userId);
+          }}
+        >
+          delete
+        </Buttons>
       </TableCell>
     </TableRow>
   ));

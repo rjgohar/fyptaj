@@ -16,7 +16,7 @@ import InputField from "../inputField";
 import { bidSchema } from "./schema";
 import CancelIcon from "@material-ui/icons/Cancel";
 import { useDispatch, useSelector } from "react-redux";
-import { addBid } from "../../redux/product/product.actions";
+
 import { PlaceBid } from "../../redux/userInWallet/inWallet.actions";
 const BidPopup = ({
   userId,

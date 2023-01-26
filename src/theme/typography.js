@@ -1,5 +1,3 @@
-import { palette } from "./palette";
-
 export const typography = {
   fontFamily: "Poppins, sans-serif",
   fontSize: 35,

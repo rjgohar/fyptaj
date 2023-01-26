@@ -1,7 +1,6 @@
 import { Box, makeStyles, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import Divider from "@material-ui/core/Divider";
-import Select from "../select";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getSingleProduct } from "../../redux/product/product.actions";

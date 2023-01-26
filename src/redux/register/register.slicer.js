@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { useNavigate } from "react-router-dom";
+
 import { checkSession, LoginUser, registerUser } from "./register.actions";
 const initialState = {
   isUserRegistering: false,

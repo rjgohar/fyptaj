@@ -2,18 +2,16 @@ import { Box, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import TopSellerCard, { ArtistSkeltonCard } from ".";
-import { getcreators } from "../../redux/creators/creators.action";
+import TopSellerCard, { FarmerSkeltonCard } from ".";
+import { getAllUsers } from "../../redux/users/users.actions";
 
 export default function Topsellers() {
   const classes = useStyle();
   const dispatch = useDispatch();
-  const {
-    Creators: { allCreators, getcreatorsGetting },
-  } = useSelector((state) => state);
+  const { farmers, usersLoading } = useSelector((state) => state.Users);
 
   useEffect(() => {
-    dispatch(getcreators());
+    dispatch(getAllUsers());
   }, [dispatch]);
   return (
     <div>
@@ -26,21 +24,21 @@ export default function Topsellers() {
 
         <Box py={4}>
           <Box className={classes.ceatorsSec}>
-            {getcreatorsGetting ? (
+            {usersLoading ? (
               <>
                 {Array(8)
                   .fill(1)
                   .map((_, i) => {
-                    return <ArtistSkeltonCard key={i} />;
+                    return <FarmerSkeltonCard key={i} />;
                   })}
               </>
             ) : (
-              allCreators.map(({ username, cover, walletAddress }, i) => {
+              farmers.map(({ username, image, walletAddress }, i) => {
                 return (
                   <Box key={i}>
                     <TopSellerCard
                       username={username}
-                      cover={cover}
+                      image={image}
                       walletAddress={walletAddress}
                     />
                   </Box>
@@ -63,7 +61,8 @@ const useStyle = makeStyles((theme) => ({
   },
 
   title: {
-    color: theme.palette.text.primary,
+    paddingLeft: 20,
+    color: theme.palette.text.head,
   },
   ceatorsSec: {
     display: "grid",

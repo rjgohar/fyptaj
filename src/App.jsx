@@ -4,7 +4,6 @@ import Routers from "./routers";
 import { theme } from "./theme";
 import React from "react";
 import ReduxProvider from "./redux/store";
-import UniversalHooks from "./components/UniversalHooks";
 
 function App() {
   return (
@@ -18,6 +17,5 @@ function App() {
 
 export default App;
 
-
 // "start": "react-scripts  --openssl-legacy-provider start",
-    // "build": "react-scripts build",
+// "build": "react-scripts build",

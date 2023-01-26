@@ -21,7 +21,7 @@ function ImageUpload({ formik, value, helperText, error }) {
           <div className={classes.image}>
             <img
               src={value && URL.createObjectURL(value)}
-              alt="product image"
+              alt="img"
               style={{ width: "100%", height: "100%" }}
             />
           </div>

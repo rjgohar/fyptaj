@@ -54,9 +54,10 @@ export default function Topsellers() {
 
 const useStyle = makeStyles((theme) => ({
   outerContainer: {
-    marginTop: 131,
+    marginTop: 40,
+    paddingBottom: 30,
     [theme.breakpoints.down("md")]: {
-      marginTop: 100,
+      marginTop: 50,
     },
   },
 

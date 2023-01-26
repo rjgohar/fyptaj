@@ -27,13 +27,11 @@ export default function MapCardFarmer() {
 }
 
 const useStyles = makeStyles((theme) => ({
-  main: {
-    paddingTop: 40,
-  },
+  main: {},
   gridSection: {
     width: "80%",
     margin: "0 auto",
-    padding: "90px 0px",
+    padding: "60px 0px",
     display: "flex",
     justifyContent: "center",
     flexWrap: "wrap",

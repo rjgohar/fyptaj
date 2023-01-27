@@ -209,3 +209,9 @@ export const deleteuserApi = async (payload) => {
     throw error;
   }
 };
+
+////////////////////////////////////////////////////////////////
+export const updateProfileAPI = async (payload) => {
+  const res = await MuiBAseUrl.post("api/users/uploadProfilePic", payload);
+  return res;
+};

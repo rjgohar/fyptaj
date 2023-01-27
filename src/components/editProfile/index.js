@@ -115,6 +115,9 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
+    [theme.breakpoints.down("sm")]: {
+      marginTop: 0,
+    },
   },
   heading: {
     marginBottom: "30px",

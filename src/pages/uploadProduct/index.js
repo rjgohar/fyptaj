@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Box,
+  CircularProgress,
   FormControl,
   FormHelperText,
   Typography,
@@ -14,22 +15,39 @@ import { useFormik } from "formik";
 import { addProductSchema } from "./schema";
 import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../../redux/product/product.actions";
+import { Alert } from "@material-ui/lab";
+import { resetData } from "../../redux/product/product.slicer";
+import { useNavigate } from "react-router-dom";
 
 const UploadFile = () => {
   const classes = useStyle();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     login: { userId },
   } = useSelector((state) => state.registerSlice);
+  const { isProductAddLoading, isProductAdded } = useSelector(
+    (state) => state.Product
+  );
+
+  useEffect(() => {
+    if (isProductAdded) {
+      setTimeout(() => {
+        dispatch(resetData());
+        navigate(`/myprofile/${userId}`);
+      }, 1000);
+    }
+  }, [dispatch, isProductAdded]);
+  const initialValues = {
+    title: "",
+    description: "",
+    rate: "",
+    quantity: "",
+    userId: userId,
+    file: "",
+  };
   const formik = useFormik({
-    initialValues: {
-      title: "",
-      description: "",
-      rate: "",
-      quantity: "",
-      userId: userId,
-      file: "",
-    },
+    initialValues,
     validationSchema: addProductSchema,
     onSubmit: (values) => {
       let fd = new FormData();
@@ -60,6 +78,11 @@ const UploadFile = () => {
           <Box className={classes.title}>
             <Typography variant="h2">Upload Items</Typography>
           </Box>
+          {isProductAdded && (
+            <Alert severity="success" style={{ fontSize: 16 }}>
+              Product Added Successfully
+            </Alert>
+          )}
 
           <Box className={classes.fields}>
             <FormControl>
@@ -139,12 +162,7 @@ const UploadFile = () => {
                 type="submit"
                 className={classes.connectButton}
               >
-                Save Data
-              </Button>
-            </Box>
-            <Box>
-              <Button variant="contained" className={classes.connectButton}>
-                discard
+                {isProductAddLoading ? <CircularProgress /> : "Save Data"}
               </Button>
             </Box>
           </Box>
@@ -284,7 +302,7 @@ const useStyle = makeStyles((theme) => ({
   },
   btns: {
     display: "grid",
-    gridTemplateColumns: "1fr 1fr",
+    gridTemplateColumns: "1fr",
     paddingTop: "25px",
     gap: 25,
     width: "100%",

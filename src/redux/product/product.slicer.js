@@ -35,6 +35,13 @@ const initialState = {
 const ProductSlice = createSlice({
   name: "product",
   initialState,
+  reducers: {
+    resetData: (state) => {
+      state.isProductAddLoading = false;
+      state.isProductAdded = false;
+      state.isProductAddLoadingFailed = false;
+    },
+  },
   extraReducers: {
     [addProduct.pending]: (state, action) => {
       state.isProductAddLoading = true;
@@ -100,4 +107,5 @@ const ProductSlice = createSlice({
   },
 });
 
+export const { resetData } = ProductSlice.actions;
 export default ProductSlice.reducer;

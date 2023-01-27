@@ -35,6 +35,7 @@ function ImageUpload({ formik, value, helperText, error }) {
       <Typography className={classes.helperText}>
         File format&nbsp;:&nbsp; JPEG, GIF, JPG, PNG, SVG, MP4
       </Typography>
+
       <input
         type={"file"}
         name="file"

@@ -9,22 +9,26 @@ import {
   Popper,
   Typography,
 } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import { useDispatch, useSelector } from "react-redux";
 import { resetRegisteringUser } from "../../redux/register/register.slicer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { baseURL } from "../../Http/config";
+import { singleusers } from "../../redux/users/singleuser/singleuser.action";
 
 const UserButton = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const {
     login: { userId, username, image },
   } = useSelector((state) => state.registerSlice);
-
+  const { isprofileupdating, isprofileupdatingSuccess } = useSelector(
+    (state) => state.editUserDetailsSlicer
+  );
   const classes = useStyles();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -39,16 +43,19 @@ const UserButton = () => {
   const handleLogout = () => {
     dispatch(resetRegisteringUser());
     handleClose();
+    navigate("/");
   };
+
   return (
     <div className={classes.root}>
       <Box className={classes.avatarBtn} onClick={handleClick}>
-        {image ? (
+        {image && (
           <Avatar
             alt="Remy Sharp"
             src={`${baseURL}assets/profilePicture/${image}`}
           />
-        ) : (
+        )}
+        {!image && (
           <Avatar alt="Remy Sharp" src="/broken-img.jpg">
             {username.slice(0, 1)}
           </Avatar>

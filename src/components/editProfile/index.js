@@ -117,6 +117,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
   },
   heading: {
+    marginBottom: "30px",
     fontSize: "35px",
     color: "#1BA665",
     [theme.breakpoints.down("sm")]: {
@@ -211,12 +212,12 @@ const useStyles = makeStyles((theme) => ({
     height: 250,
     borderRadius: "50%",
     position: "absolute",
-    bottom: -40,
+    bottom: -50,
     left: "50%",
     transform: "translate(-50%, -50%)",
     display: "flex",
     flexDirection: "column",
-    border: "2px solid #1BA665",
+    border: "4px solid #1BA665",
     [theme.breakpoints.down("md")]: {
       bottom: 189,
     },

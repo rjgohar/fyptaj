@@ -1,39 +1,42 @@
 import { Avatar, Box, Typography } from "@material-ui/core";
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import { Skeleton } from "@material-ui/lab";
 import { baseURL } from "../../Http/config";
+import { useSelector } from "react-redux";
 const TopSellerCard = ({ image, username, userId }) => {
   const classes = useStyle();
+  const { id } = useParams();
+  // const { isprofileupdatingSuccess } = useSelector(
+  //   (state) => state.editUserDetailsSlicer
+  // );
 
   return (
     <Box className={classes.container}>
-      <Link to={`/profile/${userId}`} className={classes.profileLink}>
-        {image ? (
-          <img
-            alt="image"
+      {image ? (
+        <img
+          alt="image"
+          className={classes.imageOne}
+          src={`${baseURL}assets/profilePicture/${image}`}
+        />
+      ) : (
+        <>
+          {" "}
+          <Avatar
+            alt="farmar"
+            src={"/broken-image.jpg"}
             className={classes.imageOne}
-            src={`${baseURL}assets/profilePicture/${image}`}
-          />
-        ) : (
-          <>
-            {" "}
-            <Avatar
-              alt="Remy Sharp"
-              src={"/broken-image.jpg"}
-              className={classes.imageOne}
-            >
-              {username.slice(0, 1)}
-            </Avatar>
-          </>
-        )}
+          >
+            {username.slice(0, 1)}
+          </Avatar>
+        </>
+      )}
 
-        <Box className={classes.topSellerProfile}>
-          <Typography variant="h5">@ {username}</Typography>
-        </Box>
-      </Link>
+      <Box className={classes.topSellerProfile}>
+        <Typography variant="h5">@ {username}</Typography>
+      </Box>
     </Box>
   );
 };

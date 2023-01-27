@@ -16,12 +16,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { resetRegisteringUser } from "../../redux/register/register.slicer";
 import { Link } from "react-router-dom";
 import { baseURL } from "../../Http/config";
+
 const UserButton = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const {
     login: { userId, username, image },
   } = useSelector((state) => state.registerSlice);
-  console.log(image, "hshsshshhss");
+
   const classes = useStyles();
   const dispatch = useDispatch();
   const handleClick = (event) => {
@@ -42,10 +43,17 @@ const UserButton = () => {
   return (
     <div className={classes.root}>
       <Box className={classes.avatarBtn} onClick={handleClick}>
-        <Avatar
-          alt="Remy Sharp"
-          src={`${baseURL}assets/profilePicture/${image}`}
-        />
+        {image ? (
+          <Avatar
+            alt="Remy Sharp"
+            src={`${baseURL}assets/profilePicture/${image}`}
+          />
+        ) : (
+          <Avatar alt="Remy Sharp" src="/broken-img.jpg">
+            {username.slice(0, 1)}
+          </Avatar>
+        )}
+
         <Typography variant="h4" align="center" className={classes.typo}>
           {username}
         </Typography>

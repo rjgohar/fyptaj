@@ -13,10 +13,15 @@ import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
 import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
 import Buttons from "../buttons";
+import { useSelector } from "react-redux";
 
 const HamBurger = (props) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const {
+    login: { role },
+    loginLoadingSucess,
+  } = useSelector((state) => state.registerSlice);
   const navigate = useNavigate();
   function handleRoute(path) {
     navigate(path);
@@ -78,29 +83,25 @@ const HamBurger = (props) => {
                 <Typography
                   variant="h3"
                   className={classes.HeaderText}
-                  onClick={() => handleRoute("/former")}
+                  onClick={() => handleRoute("/farmer")}
                 >
-                  former
+                  farmer
                 </Typography>
               </Box>
-              <Box>
-                <Typography
-                  className={classes.HeaderText}
-                  variant="h3"
-                  onClick={() => handleRoute("/consumer")}
-                >
-                  consumer
-                </Typography>
-              </Box>
-              <Box>
-                <Typography
-                  variant="h3"
-                  className={classes.HeaderText}
-                  onClick={() => handleRoute("/supplier")}
-                >
-                  supplier
-                </Typography>
-              </Box>
+              {role === "farmer" ? (
+                ""
+              ) : (
+                <Box>
+                  <Typography
+                    className={classes.HeaderText}
+                    variant="h3"
+                    onClick={() => handleRoute("/consumer")}
+                  >
+                    consumer
+                  </Typography>
+                </Box>
+              )}
+
               <Box>
                 <Typography
                   variant="h3"
@@ -112,15 +113,17 @@ const HamBurger = (props) => {
               </Box>
 
               <Box>
-                <Buttons
-                  className={classes.btnSign}
-                  variant="outlined"
-                  onClick={() => {
-                    handleRoute("/signin");
-                  }}
-                >
-                  Sign In
-                </Buttons>
+                {!loginLoadingSucess && (
+                  <Buttons
+                    className={classes.btnSign}
+                    variant="outlined"
+                    onClick={() => {
+                      handleRoute("/signin");
+                    }}
+                  >
+                    Sign In
+                  </Buttons>
+                )}
               </Box>
             </Box>
           </ListItem>

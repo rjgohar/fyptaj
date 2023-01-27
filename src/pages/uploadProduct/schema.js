@@ -4,4 +4,5 @@ export const addProductSchema = yup.object().shape({
   rate: yup.number().required().positive("Must be a positive number"),
   quantity: yup.number().required().positive("Must be a positive number"),
   description: yup.string().required().max(150),
+  file: yup.string().required(),
 });

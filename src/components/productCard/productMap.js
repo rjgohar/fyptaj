@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "0 auto",
     padding: "90px 0px",
     display: "flex",
-    justifyContent: "center",
+    padding: "0px 20px",
     flexWrap: "wrap",
     gap: 40,
   },

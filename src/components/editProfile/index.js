@@ -3,15 +3,19 @@ import React, { useRef, useState } from "react";
 import ImageIcon from "@material-ui/icons/Image";
 import img from "../../assets/pic.png";
 import { useDispatch, useSelector } from "react-redux";
-import { updateProfilePic } from "../../redux/users/updatedata/userdataupdat.action";
+import {
+  editProfile,
+  updateProfilePic,
+} from "../../redux/users/updatedata/userdataupdat.action";
 import { baseURL } from "../../Http/config";
+import { useFormik } from "formik";
 const EditProfile = () => {
   const imageRef = useRef();
 
   const {
     singleuser: { userInfo },
   } = useSelector((state) => state.singleuserSlicer);
-  console.log(userInfo, "infp");
+
   const [image, setProfileImage] = useState();
   const dispatch = useDispatch();
   const uploadProfilePic = (e) => {
@@ -26,16 +30,19 @@ const EditProfile = () => {
     dispatch(updateProfilePic(fd));
   };
 
-  // const dataUpate = () => {
-  //   const fd = new FormData();
-  //   fd.append("description", description);
-  //   fd.append("cnic", cnic);
-  //   fd.append("location", location);
-  //   fd.append("email", email);
-  //   fd.append("userId", userId);
+  const formik = useFormik({
+    initialValues: {
+      description: userInfo.description,
+      cnic: userInfo.cnic,
+      location: userInfo.location,
+      email: userInfo.email,
+      userId: userInfo.userId,
+    },
+    onSubmit: (values) => {
+      dispatch(editProfile(values));
+    },
+  });
 
-  //   dispatch(updateUserprofile(fd));
-  // };
   const classes = useStyles();
   return (
     <Box className={classes.main}>
@@ -68,40 +75,61 @@ const EditProfile = () => {
         </div>
       </Box>
 
-      <Box className={classes.row}>
+      <form onSubmit={formik.handleSubmit}>
         <Box>
-          <input type="text" placeHolder="User ID" className={classes.input} />
+          <Box className={classes.row}>
+            <Box>
+              <input
+                type="text"
+                placeHolder="Email"
+                className={classes.input}
+                name="email"
+                value={formik.values.email}
+                disabled
+              />
+            </Box>
+            <Box>
+              <input
+                type="text"
+                placeHolder="CNIC"
+                className={classes.input}
+                name="cnic"
+                onChange={formik.handleChange}
+                value={formik.values.cnic}
+              />
+            </Box>
+          </Box>
+          <Box className={classes.row}>
+            <Box>
+              <input
+                type="text"
+                placeHolder="Location"
+                className={classes.input}
+                name="location"
+                value={formik.values.location}
+                onChange={formik.handleChange}
+              />
+            </Box>
+          </Box>
+          <Box className={classes.desc}>
+            <Box>
+              <textarea
+                type="text"
+                placeHolder="Description"
+                className={classes.descInput}
+                name="description"
+                value={formik.values.description}
+                onChange={formik.handleChange}
+              />
+            </Box>
+            <Box className={classes.endsection}>
+              <button type="submit" className={classes.submitBtn}>
+                Update Now
+              </button>
+            </Box>
+          </Box>
         </Box>
-        <Box>
-          <input type="text" placeHolder="CNIC" className={classes.input} />
-        </Box>
-      </Box>
-      <Box className={classes.row}>
-        <Box>
-          <input type="text" placeHolder="Email" className={classes.input} />
-        </Box>
-        <Box>
-          <input type="text" placeHolder="Location" className={classes.input} />
-        </Box>
-      </Box>
-      <Box className={classes.desc}>
-        <Box>
-          <textarea
-            type="text"
-            placeHolder="Description"
-            className={classes.descInput}
-          />
-        </Box>
-        <Box className={classes.endsection}>
-          <button
-            type="submit"
-            // onClick={() => dataUpate()}
-            className={classes.submitBtn}
-          >
-            Update Now
-          </button>
-        </Box>
-      </Box>
+      </form>
     </Box>
   );
 };

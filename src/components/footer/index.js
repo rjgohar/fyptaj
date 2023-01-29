@@ -62,7 +62,7 @@ export default function Footer() {
               Supplier
             </Typography>
             <Typography className="text" variant="subtitle1">
-              Cart
+              Home
             </Typography>
           </div>
         </Box>
@@ -101,32 +101,6 @@ export default function Footer() {
             </div>
           </div>
         </Box>
-
-        <Box>
-          <Typography className={classes.heading} variant="h3">
-            get in touch
-          </Typography>
-          <div className={classes.innerHead}>
-            <Box className={classes.innerSec}>
-              <Typography variant="subtitle2" className="typo">
-                {" "}
-                Email
-              </Typography>
-              <TextField variant="outlined" placeholder="Email" />
-            </Box>
-            <Box className={classes.innerSec}>
-              <Typography variant="subtitle2" className="typo">
-                {" "}
-                Comments
-              </Typography>
-              <textarea className={classes.textarea} />
-            </Box>
-            <Buttons style={{ width: 200 }} variant="outlined">
-              {" "}
-              send me a message
-            </Buttons>
-          </div>
-        </Box>
       </Box>
 
       <Box className={classes.end}>
@@ -145,7 +119,7 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: 30,
     display: "grid",
     gap: 30,
-    gridTemplateColumns: "0.5fr  1fr 1fr 1fr   1fr",
+    gridTemplateColumns: "1fr  1fr 1fr 1fr   ",
     [theme.breakpoints.down("sm")]: {
       paddingLeft: "40px",
       gridTemplateColumns: "1fr",
@@ -174,8 +148,8 @@ const useStyles = makeStyles((theme) => ({
 
     "& .logo": {
       paddingLeft: 20,
-      width: 100,
-      height: 100,
+      width: 250,
+      height: 200,
     },
     "& .text1": {
       fontSize: 16,

@@ -3,7 +3,10 @@ import React, { useEffect, useState } from "react";
 import Divider from "@material-ui/core/Divider";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getSingleProduct } from "../../redux/product/product.actions";
+import {
+  getSingleProduct,
+  settleAuction,
+} from "../../redux/product/product.actions";
 import BidPopup from "../bidPopup";
 import Buttons from "../buttons";
 import Timer from "../Timer";
@@ -43,6 +46,9 @@ export default function ProductDetails() {
   };
   console.log(reserveQuantity, "quam");
   const handleModalOpen = () => setOpen(true);
+  const handleSettleAuction = () => {
+    dispatch(settleAuction({ productId, auctionId, reserveQuantity }));
+  };
   useEffect(() => {
     dispatch(getSingleProduct(id));
   }, [dispatch, id, isaddingBidSucces]);
@@ -132,6 +138,13 @@ export default function ProductDetails() {
             <Box display={"flex"} justifyContent="center">
               <Buttons onClick={handleModalOpen} variant="contained">
                 Place Bid
+              </Buttons>
+            </Box>
+          )}
+          {isAuctionEnded && (
+            <Box display={"flex"} justifyContent="center">
+              <Buttons onClick={handleSettleAuction} variant="contained">
+                Settle Auction
               </Buttons>
             </Box>
           )}

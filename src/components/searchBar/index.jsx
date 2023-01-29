@@ -1,11 +1,30 @@
 import { InputBase, makeStyles } from "@material-ui/core";
-import React from "react";
+import React, { useRef } from "react";
+import { useDispatch } from "react-redux";
 import SvgIcon from "../../assets/search.svg";
+import {
+  getAllProducts,
+  searchProduct,
+} from "../../redux/product/product.actions";
 const SearchBar = (props) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const handleSearch = (event) => {
+    if (event.target.value !== "") {
+      dispatch(searchProduct(event.target.value));
+    } else {
+      dispatch(getAllProducts());
+    }
+  };
   return (
     <div className={classes.SearchBox}>
-      <InputBase className={classes.input} placeholder="search" {...props} />
+      <InputBase
+        className={classes.input}
+        placeholder="search"
+        onChange={handleSearch}
+        {...props}
+      />
       <img src={SvgIcon} search width="24.75px" />
     </div>
   );

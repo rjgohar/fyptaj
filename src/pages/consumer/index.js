@@ -6,6 +6,7 @@ import SearchBar from "../../components/searchBar";
 
 export default function Consumer() {
   const classes = useStyles();
+
   return (
     <div className={classes.main}>
       <div className={classes.inner}>

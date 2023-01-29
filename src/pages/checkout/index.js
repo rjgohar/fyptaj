@@ -2,6 +2,7 @@ import React from "react";
 import { Box, makeStyles, Typography } from "@material-ui/core";
 import img from "../../assets/bg.jpg";
 import Button from "../../components/button";
+import { Link } from "react-router-dom";
 
 const CheckoutPage = () => {
   const classes = useStyles();
@@ -41,9 +42,12 @@ const CheckoutPage = () => {
           </Box>
         </Box>
         <Box rowEnd>
-          <button type="submit" className={classes.btn}>
-            Pay Now
-          </button>
+          <Link to="/checkoutProduct">
+            {" "}
+            <button type="submit" className={classes.btn}>
+              Pay Now
+            </button>
+          </Link>
         </Box>
       </Box>
     </>

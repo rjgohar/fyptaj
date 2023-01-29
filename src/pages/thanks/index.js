@@ -1,5 +1,6 @@
 import { makeStyles, Typography } from "@material-ui/core";
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Thanks() {
   const classes = useStyles();
@@ -15,10 +16,13 @@ export default function Thanks() {
             use. If you have any questions or concerns, please don't hesitate to
             reach out to us. We're always here to help.
           </Typography>
-          <button className={classes.btn}>Shopping More</button>
+          <Link to="/">
+            {" "}
+            <button className={classes.btn}>Shopping More</button>
+          </Link>
         </div>
       </div>{" "}
-      <div className={classes.thanksMain}>
+      {/* <div className={classes.thanksMain}>
         <div className={classes.thanksinner}>
           <Typography variant="h1"> Order Failed</Typography>
 
@@ -30,7 +34,7 @@ export default function Thanks() {
           </Typography>
           <button className={classes.btn}>Try Again</button>
         </div>
-      </div>{" "}
+      </div>{" "} */}
     </div>
   );
 }

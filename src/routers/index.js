@@ -11,7 +11,11 @@ import Signup from "../pages/signup";
 // import ProductDetails from "../components/productDetails";
 import ProductDetail from "../pages/productDetails";
 import UploadFile from "../pages/uploadProduct";
-import PrivateRoute, { FarmerRoute, UserRoute } from "./protectedRoute";
+import PrivateRoute, {
+  AdminRoute,
+  FarmerRoute,
+  UserRoute,
+} from "./protectedRoute";
 
 import AdminDashboard from "../components/adminDashboard";
 import AboutUs from "../pages/aboutus";
@@ -48,7 +52,14 @@ const Routers = () => {
           />
           <Route path="/myprofile/:id" element={<Usersdashboard />} />
 
-          <Route path="/admindashboard" element={<AdminDashboard />} />
+          <Route
+            path="/admindashboard"
+            element={
+              <AdminRoute>
+                <AdminDashboard />
+              </AdminRoute>
+            }
+          />
           <Route path="/editprofile" element={<EditProfile />} />
         </Routes>
 

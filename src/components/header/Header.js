@@ -46,24 +46,40 @@ const Header = () => {
               >
                 Home
               </Typography>
-
-              <Typography
-                variant="h2"
-                className="textHead"
-                onClick={() => handleRoute("/farmer")}
-              >
-                farmer
-              </Typography>
-              {role === "farmer" ? (
-                ""
+              {role === "admin" ? (
+                <Typography
+                  variant="h2"
+                  className="textHead"
+                  onClick={() => handleRoute("/admindashboard")}
+                >
+                  Dashboard
+                </Typography>
               ) : (
                 <Typography
                   variant="h2"
                   className="textHead"
-                  onClick={() => handleRoute("/consumer")}
+                  onClick={() => handleRoute("/farmer")}
                 >
-                  Consumer
+                  farmer
                 </Typography>
+              )}
+
+              {role === "farmer" ? (
+                ""
+              ) : (
+                <>
+                  {role === "admin" ? (
+                    ""
+                  ) : (
+                    <Typography
+                      variant="h2"
+                      className="textHead"
+                      onClick={() => handleRoute("/consumer")}
+                    >
+                      Consumer
+                    </Typography>
+                  )}
+                </>
               )}
 
               <Typography

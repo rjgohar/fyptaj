@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { resetRegisteringUser } from "../../redux/register/register.slicer";
 import { Link, useNavigate } from "react-router-dom";
 import { baseURL } from "../../Http/config";
-import { singleusers } from "../../redux/users/singleuser/singleuser.action";
+import { getAllUsers } from "../../redux/users/users.actions";
 
 const UserButton = () => {
   const [anchorEl, setAnchorEl] = useState(null);

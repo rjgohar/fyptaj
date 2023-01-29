@@ -77,7 +77,7 @@ function VerticalTabs() {
             })}
             label="edit profile"
           />
-          {role === "user" ? (
+          {role === "user" || role === "admin" ? (
             ""
           ) : (
             <Tab
@@ -100,7 +100,7 @@ function VerticalTabs() {
             <EditProfile />
           </div>
         </TabPanel>
-        {role === "user" ? (
+        {role === "user" || role === "admin" ? (
           ""
         ) : (
           <TabPanel value={value} index={2}>

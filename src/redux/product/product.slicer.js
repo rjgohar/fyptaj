@@ -5,6 +5,7 @@ import {
   deleteProduct,
   getAllProducts,
   getSingleProduct,
+  searchProduct,
 } from "./product.actions";
 
 const initialState = {
@@ -103,6 +104,19 @@ const ProductSlice = createSlice({
     [deleteProduct.rejected]: (state, action) => {
       state.isProductDeleteLoading = false;
       state.isProductDeleteFailed = true;
+    },
+    /////////////////////////////////
+    [searchProduct.pending]: (state) => {
+      state.areAllProductsLoading = true;
+    },
+    [searchProduct.fulfilled]: (state, action) => {
+      state.areAllProductsLoading = false;
+      state.areAllProductsLoaded = true;
+      state.allProductsData = action.payload.products;
+    },
+    [searchProduct.rejected]: (state) => {
+      state.areAllProductsLoading = false;
+      state.areAllProductsLoadedFailed = true;
     },
   },
 });

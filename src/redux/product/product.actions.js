@@ -5,6 +5,7 @@ import {
   deleteProductsApi,
   getAllProductsApi,
   getSingleProductApi,
+  searchProductApi,
 } from "../../Http/api";
 
 export const addProduct = createAsyncThunk(
@@ -36,6 +37,13 @@ export const deleteProduct = createAsyncThunk(
   "product/deleteProduct",
   async (payload) => {
     const { data } = await deleteProductsApi(payload);
+    return data;
+  }
+);
+export const searchProduct = createAsyncThunk(
+  "search/searchProduct",
+  async (payload) => {
+    const { data } = await searchProductApi(payload);
     return data;
   }
 );

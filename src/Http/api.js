@@ -215,3 +215,23 @@ export const updateProfileAPI = async (payload) => {
   const res = await MuiBAseUrl.post("api/users/uploadProfilePic", payload);
   return res;
 };
+export const searchProductApi = async (payload) => {
+  try {
+    const res = await MuiBAseUrl.get("api/users/searchProduct", {
+      params: {
+        title: payload,
+      },
+    });
+    return res;
+  } catch (error) {
+    throw error;
+  }
+};
+export const editProfileApi = async (payload) => {
+  try {
+    const res = await MuiBAseUrl.post("api/users/updateUserInfo", payload);
+    return res;
+  } catch (error) {
+    throw error;
+  }
+};

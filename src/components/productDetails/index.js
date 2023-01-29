@@ -1,7 +1,7 @@
 import { Box, makeStyles, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import Divider from "@material-ui/core/Divider";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getSingleProduct,
@@ -16,6 +16,7 @@ export default function ProductDetails() {
   const classes = useStyles();
   const { id } = useParams();
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
   const [isAuctionEnded, setIsAuctionEnded] = useState(false);
   const dispatch = useDispatch();
   const {
@@ -48,6 +49,7 @@ export default function ProductDetails() {
   const handleModalOpen = () => setOpen(true);
   const handleSettleAuction = () => {
     dispatch(settleAuction({ productId, auctionId, reserveQuantity }));
+    navigate("/checkout");
   };
   useEffect(() => {
     dispatch(getSingleProduct(id));

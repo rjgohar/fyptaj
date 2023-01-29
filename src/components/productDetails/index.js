@@ -16,6 +16,9 @@ export default function ProductDetails() {
   const [isAuctionEnded, setIsAuctionEnded] = useState(false);
   const dispatch = useDispatch();
   const {
+    login: { role },
+  } = useSelector((state) => state.registerSlice);
+  const {
     singleProductData: {
       productTitle,
       productDescription,
@@ -30,6 +33,7 @@ export default function ProductDetails() {
       reservePrice,
       auctionId,
       endTime,
+      isListed,
     },
   } = useSelector((state) => state.Product);
   const { isaddingBidSucces } = useSelector((state) => state.inWallet);
@@ -124,7 +128,7 @@ export default function ProductDetails() {
               />
             )}
           </div>
-          {!isAuctionEnded && (
+          {!isAuctionEnded && isListed === 1 && role == "user" && (
             <Box display={"flex"} justifyContent="center">
               <Buttons onClick={handleModalOpen} variant="contained">
                 Place Bid

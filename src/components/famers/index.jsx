@@ -9,9 +9,6 @@ import { useSelector } from "react-redux";
 const TopSellerCard = ({ image, username, userId }) => {
   const classes = useStyle();
   const { id } = useParams();
-  // const { isprofileupdatingSuccess } = useSelector(
-  //   (state) => state.editUserDetailsSlicer
-  // );
 
   return (
     <Box className={classes.container}>

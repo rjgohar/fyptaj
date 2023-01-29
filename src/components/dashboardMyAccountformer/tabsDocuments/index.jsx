@@ -12,6 +12,7 @@ import ProfileFormer from "../../profileformer";
 
 import InWalletProducts from "../../inWalletProducts/productMap";
 import EditProfile from "../../editProfile";
+import { useSelector } from "react-redux";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -41,6 +42,10 @@ TabPanel.propTypes = {
 
 function VerticalTabs() {
   const classes = useStyles();
+  const {
+    login: { role },
+    loginLoadingSucess,
+  } = useSelector((state) => state.registerSlice);
   const [value, setValue] = React.useState(0);
   console.log(value, "valueeee");
 
@@ -72,13 +77,17 @@ function VerticalTabs() {
             })}
             label="edit profile"
           />
-          <Tab
-            class={clsx({
-              [classes.forTabs]: true,
-              [classes.selected]: value === 2,
-            })}
-            label="Created Products"
-          />
+          {role === "user" ? (
+            ""
+          ) : (
+            <Tab
+              class={clsx({
+                [classes.forTabs]: true,
+                [classes.selected]: value === 2,
+              })}
+              label="Created Products"
+            />
+          )}
         </Tabs>
       </Box>
 
@@ -91,9 +100,13 @@ function VerticalTabs() {
             <EditProfile />
           </div>
         </TabPanel>
-        <TabPanel value={value} index={2}>
-          <InWalletProducts />
-        </TabPanel>
+        {role === "user" ? (
+          ""
+        ) : (
+          <TabPanel value={value} index={2}>
+            <InWalletProducts />
+          </TabPanel>
+        )}
       </Box>
     </div>
   );

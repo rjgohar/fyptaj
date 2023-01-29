@@ -13,7 +13,7 @@ const Header = () => {
   const classes = useStyles();
   const navigate = useNavigate();
   const {
-    // login: { username, userId },
+    login: { role },
     loginLoadingSucess,
   } = useSelector((state) => state.registerSlice);
   function handleRoute(path) {
@@ -54,13 +54,17 @@ const Header = () => {
               >
                 farmer
               </Typography>
-              <Typography
-                variant="h2"
-                className="textHead"
-                onClick={() => handleRoute("/consumer")}
-              >
-                Consumer
-              </Typography>
+              {role === "farmer" ? (
+                ""
+              ) : (
+                <Typography
+                  variant="h2"
+                  className="textHead"
+                  onClick={() => handleRoute("/consumer")}
+                >
+                  Consumer
+                </Typography>
+              )}
 
               <Typography
                 variant="h2"

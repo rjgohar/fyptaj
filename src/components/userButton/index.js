@@ -16,10 +16,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { resetRegisteringUser } from "../../redux/register/register.slicer";
 import { Link, useNavigate } from "react-router-dom";
 import { baseURL } from "../../Http/config";
-import { singleusers } from "../../redux/users/singleuser/singleuser.action";
+import { getAllUsers } from "../../redux/users/users.actions";
 
 const UserButton = () => {
   const [anchorEl, setAnchorEl] = useState(null);
+
+  useEffect(() => {
+    dispatch(getAllUsers());
+  }, [dispatch]);
   const {
     login: { userId, username, image },
   } = useSelector((state) => state.registerSlice);
@@ -52,7 +56,7 @@ const UserButton = () => {
         {image && (
           <Avatar
             alt="Remy Sharp"
-            src={`${baseURL}assets/profilePicture/${image}`}
+            src={`${baseURL}/assets/profilePicture/${image}`}
           />
         )}
         {!image && (

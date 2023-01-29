@@ -22,6 +22,8 @@ import AboutUs from "../pages/aboutus";
 import UniversalHooks from "../components/UniversalHooks";
 import Usersdashboard from "../pages/profilepage";
 import EditProfile from "../components/editProfile";
+import CheckoutPage from "../pages/checkout";
+import Thanks from "../pages/thanks";
 const Routers = () => {
   return (
     <UniversalHooks>
@@ -61,6 +63,9 @@ const Routers = () => {
             }
           />
           <Route path="/editprofile" element={<EditProfile />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+
+          <Route path="/thanks" element={<Thanks />} />
         </Routes>
 
         <Footer />

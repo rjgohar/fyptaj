@@ -2,6 +2,7 @@ import { makeStyles, Typography } from "@material-ui/core";
 import React from "react";
 
 import ProductsMap from "../../components/productCard/productMap";
+import SearchBar from "../../components/searchBar";
 
 export default function Consumer() {
   const classes = useStyles();
@@ -17,13 +18,16 @@ export default function Consumer() {
           order.
         </Typography>
       </div>
-      <ProductsMap />
+      <div className={classes.endone}>
+        <SearchBar />
+        <ProductsMap />
+      </div>
     </div>
   );
 }
 const useStyles = makeStyles((theme) => ({
   main: {
-    paddingTop: 180,
+    paddingTop: 30,
   },
   inner: {
     width: "80%",
@@ -47,5 +51,11 @@ const useStyles = makeStyles((theme) => ({
         padding: "10px 0px",
       },
     },
+  },
+  endone: {
+    display: "flex",
+    gap: 20,
+    flexDirection: "column",
+    marginBottom: 30,
   },
 }));

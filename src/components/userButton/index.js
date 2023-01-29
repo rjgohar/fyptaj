@@ -9,16 +9,26 @@ import {
   Popper,
   Typography,
 } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import { useDispatch, useSelector } from "react-redux";
 import { resetRegisteringUser } from "../../redux/register/register.slicer";
 import { Link } from "react-router-dom";
 import { baseURL } from "../../Http/config";
+import { getAllUsers } from "../../redux/users/users.actions";
 
 const UserButton = () => {
   const [anchorEl, setAnchorEl] = useState(null);
+
+  // const {
+  //   farmers: { image },
+  // } = useSelector((state) => state.Users);
+  // console.log(farmers.image, "img");
+
+  useEffect(() => {
+    dispatch(getAllUsers());
+  }, [dispatch]);
   const {
     login: { userId, username, image },
   } = useSelector((state) => state.registerSlice);
@@ -46,7 +56,7 @@ const UserButton = () => {
         {image ? (
           <Avatar
             alt="Remy Sharp"
-            src={`${baseURL}assets/profilePicture/${image}`}
+            src={`${baseURL}/assets/profilePicture/${image}`}
           />
         ) : (
           <Avatar alt="Remy Sharp" src="/broken-img.jpg">
